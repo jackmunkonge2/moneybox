@@ -60,7 +60,6 @@ class RestManager {
         for (header, value) in requestHttpHeaders.allValues() {
             request.setValue(value, forHTTPHeaderField: header)
         }
-     
         request.httpBody = httpBody
         return request
     }
@@ -76,7 +75,7 @@ class RestManager {
                 completion(Results(withError: CustomError.failedToCreateRequest))
                 return
             }
-     
+
             let sessionConfiguration = URLSessionConfiguration.default
             let session = URLSession(configuration: sessionConfiguration)
             let task = session.dataTask(with: request) { (data, response, error) in
