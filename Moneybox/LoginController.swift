@@ -100,10 +100,10 @@ class LoginController: UIViewController, UITextFieldDelegate {
             print("\n\nData:\n")
 
             if let data = results.data {
-//                let decoder = JSONDecoder()
-//                decoder.keyDecodingStrategy = .convertFromSnakeCase
-//                guard let userData = try? decoder.decode(LoginSuccess.self, from: data) else { return }
-                print(data)
+                let decoder = JSONDecoder()
+                decoder.keyDecodingStrategy = .convertFromSnakeCase
+                guard let investorProductData = try? decoder.decode(InvestorProducts.self, from: data) else { return }
+                print(investorProductData)
             }
         }
     }

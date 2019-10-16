@@ -25,16 +25,6 @@ struct ValidationErrorResponse: Codable {
     var message: String
     var validationErrors: [ValidationError]
     
-    struct ValidationError: Codable {
-        var name: String
-        var message: String
-        
-        private enum CodingKeys: String, CodingKey {
-            case name = "Name"
-            case message = "Message"
-        }
-    }
-    
     private enum CodingKeys: String, CodingKey {
         case name = "Name"
         case message = "Message"
@@ -42,18 +32,64 @@ struct ValidationErrorResponse: Codable {
     }
 }
 
+struct ValidationError: Codable {
+    var name: String
+    var message: String
+    
+    private enum CodingKeys: String, CodingKey {
+        case name = "Name"
+        case message = "Message"
+    }
+}
+
 struct LoginSuccess: Codable {
     var session: Session
     
-    struct Session: Codable {
-        var bearerToken: String
-        
-        private enum CodingKeys: String, CodingKey {
-            case bearerToken = "BearerToken"
-        }
-    }
-    
     private enum CodingKeys: String, CodingKey {
         case session = "Session"
+    }
+}
+
+struct Session: Codable {
+    var bearerToken: String
+    
+    private enum CodingKeys: String, CodingKey {
+        case bearerToken = "BearerToken"
+    }
+}
+
+struct InvestorProducts: Codable {
+    var totalPlanValue: Double
+    var productResponses: [ProductResponse]
+    
+    private enum CodingKeys: String, CodingKey {
+        case totalPlanValue = "TotalPlanValue"
+        case productResponses = "ProductResponses"
+    }
+}
+
+struct ProductResponse: Codable {
+    var id: Int
+    var planValue: Double
+    var moneybox: Int
+    var product: Product
+    
+    private enum CodingKeys: String, CodingKey {
+        case id = "Id"
+        case planValue = "PlanValue"
+        case moneybox = "Moneybox"
+        case product = "Product"
+    }
+}
+
+struct Product: Codable {
+    var id: Int
+    var type: String
+    var friendlyName: String
+    
+    private enum CodingKeys: String, CodingKey {
+        case id = "Id"
+        case type = "Type"
+        case friendlyName = "FriendlyName"
     }
 }
