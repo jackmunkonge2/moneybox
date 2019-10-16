@@ -1,5 +1,5 @@
 //
-//  Structures.swift
+//  Decoders.swift
 //  Moneybox
 //
 //  Created by Jack Munkonge on 14/10/2019.

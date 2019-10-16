@@ -14,7 +14,7 @@
 		04DFE5502354EADB00DF0F30 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 04DFE54F2354EADB00DF0F30 /* Assets.xcassets */; };
 		04DFE5532354EADB00DF0F30 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 04DFE5512354EADB00DF0F30 /* LaunchScreen.storyboard */; };
 		04DFE55B2354EB9B00DF0F30 /* RestManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04DFE55A2354EB9B00DF0F30 /* RestManager.swift */; };
-		04DFE55D2354FF7300DF0F30 /* Structures.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04DFE55C2354FF7300DF0F30 /* Structures.swift */; };
+		04DFE55D2354FF7300DF0F30 /* Decoders.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04DFE55C2354FF7300DF0F30 /* Decoders.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -27,7 +27,7 @@
 		04DFE5522354EADB00DF0F30 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		04DFE5542354EADB00DF0F30 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		04DFE55A2354EB9B00DF0F30 /* RestManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RestManager.swift; sourceTree = "<group>"; };
-		04DFE55C2354FF7300DF0F30 /* Structures.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Structures.swift; sourceTree = "<group>"; };
+		04DFE55C2354FF7300DF0F30 /* Decoders.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Decoders.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -68,7 +68,7 @@
 				04DFE5512354EADB00DF0F30 /* LaunchScreen.storyboard */,
 				04DFE5542354EADB00DF0F30 /* Info.plist */,
 				04DFE55A2354EB9B00DF0F30 /* RestManager.swift */,
-				04DFE55C2354FF7300DF0F30 /* Structures.swift */,
+				04DFE55C2354FF7300DF0F30 /* Decoders.swift */,
 			);
 			path = Moneybox;
 			sourceTree = "<group>";
@@ -144,7 +144,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				04DFE55D2354FF7300DF0F30 /* Structures.swift in Sources */,
+				04DFE55D2354FF7300DF0F30 /* Decoders.swift in Sources */,
 				04DFE54B2354EADA00DF0F30 /* LoginController.swift in Sources */,
 				04DFE55B2354EB9B00DF0F30 /* RestManager.swift in Sources */,
 				04DFE5472354EADA00DF0F30 /* AppDelegate.swift in Sources */,
