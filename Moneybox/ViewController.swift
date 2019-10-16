@@ -30,6 +30,8 @@ class ViewController: UIViewController, UITextFieldDelegate {
     
     let rest = RestManager()
     
+    var bearerToken = ""
+    
     func attemptLogin(withEmail email: String!, withPassword password: String!) {
         guard let url = URL(string: "https://api-test01.moneyboxapp.com/users/login") else { return }
      
@@ -48,8 +50,7 @@ class ViewController: UIViewController, UITextFieldDelegate {
                 guard let data = results.data else { return }
                 let decoder = JSONDecoder()
                 guard let loginSuccess = try? decoder.decode(LoginSuccess.self, from: data) else { return }
-                print(loginSuccess)
-                //TODO: use/store bearer token
+                self.bearerToken = loginSuccess.session.bearerToken
             } else {
                 guard let data = results.data else { return }
                 let decoder = JSONDecoder()
@@ -65,39 +66,37 @@ class ViewController: UIViewController, UITextFieldDelegate {
         }
     }
     
-//    func getUsersList() {
-//        guard let url = URL(string: "https://reqres.in/api/users") else { return }
-//
-//        // The following will make RestManager create the following URL:
-//        // https://reqres.in/api/users?page=2
-//        // rest.urlQueryParameters.add(value: "2", forKey: "page")
-//
-//        rest.makeRequest(toURL: url, withHttpMethod: .get) { (results) in
-//            print("\n\nResponse HTTP Headers:\n")
-//
-//            if let response = results.response {
-//                if response.httpStatusCode != 200 {
-//                    print("\nRequest failed with HTTP status code", response.httpStatusCode, "\n")
-//                    return
-//                }
-//
-//                for (key, value) in response.headers.allValues() {
-//                   print(key, value)
-//                }
-//            }
-//
-//            print("\n\nData:\n")
-//
-//            if let data = results.data {
-//                let decoder = JSONDecoder()
-//                decoder.keyDecodingStrategy = .convertFromSnakeCase
-//                guard let userData = try? decoder.decode(LoginSuccess.self, from: data) else { return }
-//                print(userData.description)
-//            }
-//
-//
-//        }
-//    }
+    func getInvestorProducts() {
+        guard let url = URL(string: "https://api-test01.moneyboxapp.com/investorproducts") else { return }
+
+        rest.requestHttpHeaders.add(value: "3a97b932a9d449c981b595", forKey: "Appid")
+
+        rest.makeRequest(toURL: url, withHttpMethod: .get) { (results) in
+            print("\n\nResponse HTTP Headers:\n")
+
+            if let response = results.response {
+                if response.httpStatusCode != 200 {
+                    print("\nRequest failed with HTTP status code", response.httpStatusCode, "\n")
+                    return
+                }
+
+                for (key, value) in response.headers.allValues() {
+                   print(key, value)
+                }
+            }
+
+            print("\n\nData:\n")
+
+            if let data = results.data {
+                let decoder = JSONDecoder()
+                decoder.keyDecodingStrategy = .convertFromSnakeCase
+                guard let userData = try? decoder.decode(LoginSuccess.self, from: data) else { return }
+                print("")
+            }
+
+
+        }
+    }
 //
 //    func getSingleUser() {
 //        guard let url = URL(string: "https://reqres.in/api/users/1") else { return }
