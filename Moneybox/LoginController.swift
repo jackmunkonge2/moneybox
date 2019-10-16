@@ -8,7 +8,7 @@
 
 import UIKit
 
-class ViewController: UIViewController, UITextFieldDelegate {
+class LoginController: UIViewController, UITextFieldDelegate {
     
     @IBOutlet weak var email: UITextField! { didSet { email.delegate = self } }
     
@@ -69,7 +69,7 @@ class ViewController: UIViewController, UITextFieldDelegate {
     func getInvestorProducts() {
         guard let url = URL(string: "https://api-test01.moneyboxapp.com/investorproducts") else { return }
 
-        rest.requestHttpHeaders.add(value: "3a97b932a9d449c981b595", forKey: "Appid")
+        rest.requestHttpHeaders.add(value: self.bearerToken, forKey: "Authorization")
 
         rest.makeRequest(toURL: url, withHttpMethod: .get) { (results) in
             print("\n\nResponse HTTP Headers:\n")
