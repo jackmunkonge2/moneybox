@@ -60,7 +60,7 @@ struct Session: Codable {
 
 struct InvestorProducts: Codable {
     var totalPlanValue: Double
-    var productResponses: [ProductResponse]
+    var productResponses: [InvestorProductResponse]
     
     private enum CodingKeys: String, CodingKey {
         case totalPlanValue = "TotalPlanValue"
@@ -68,11 +68,11 @@ struct InvestorProducts: Codable {
     }
 }
 
-struct ProductResponse: Codable {
+struct InvestorProductResponse: Codable {
     var id: Int
     var planValue: Double
     var moneybox: Int
-    var product: Product
+    var product: InvestorProduct
     
     private enum CodingKeys: String, CodingKey {
         case id = "Id"
@@ -82,7 +82,7 @@ struct ProductResponse: Codable {
     }
 }
 
-struct Product: Codable {
+struct InvestorProduct: Codable {
     var id: Int
     var type: String
     var friendlyName: String

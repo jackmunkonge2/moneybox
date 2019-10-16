@@ -15,6 +15,9 @@
 		04DFE5532354EADB00DF0F30 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 04DFE5512354EADB00DF0F30 /* LaunchScreen.storyboard */; };
 		04DFE55B2354EB9B00DF0F30 /* RestManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04DFE55A2354EB9B00DF0F30 /* RestManager.swift */; };
 		04DFE55D2354FF7300DF0F30 /* Decoders.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04DFE55C2354FF7300DF0F30 /* Decoders.swift */; };
+		04F43669235788C300377BD4 /* ProductTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04F43668235788C300377BD4 /* ProductTableViewCell.swift */; };
+		04F4366B235790EA00377BD4 /* ProductTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04F4366A235790EA00377BD4 /* ProductTableViewController.swift */; };
+		04F4366F2357947300377BD4 /* Product.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04F4366E2357947300377BD4 /* Product.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -28,6 +31,9 @@
 		04DFE5542354EADB00DF0F30 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		04DFE55A2354EB9B00DF0F30 /* RestManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RestManager.swift; sourceTree = "<group>"; };
 		04DFE55C2354FF7300DF0F30 /* Decoders.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Decoders.swift; sourceTree = "<group>"; };
+		04F43668235788C300377BD4 /* ProductTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductTableViewCell.swift; sourceTree = "<group>"; };
+		04F4366A235790EA00377BD4 /* ProductTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductTableViewController.swift; sourceTree = "<group>"; };
+		04F4366E2357947300377BD4 /* Product.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Product.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -60,17 +66,44 @@
 		04DFE5452354EADA00DF0F30 /* Moneybox */ = {
 			isa = PBXGroup;
 			children = (
+				04F43661235785D500377BD4 /* Controllers */,
 				04DFE5462354EADA00DF0F30 /* AppDelegate.swift */,
 				04DFE5482354EADA00DF0F30 /* SceneDelegate.swift */,
-				04DFE54A2354EADA00DF0F30 /* LoginController.swift */,
-				04DFE54C2354EADA00DF0F30 /* Main.storyboard */,
+				04F436632357863000377BD4 /* Storyboards */,
 				04DFE54F2354EADB00DF0F30 /* Assets.xcassets */,
-				04DFE5512354EADB00DF0F30 /* LaunchScreen.storyboard */,
 				04DFE5542354EADB00DF0F30 /* Info.plist */,
-				04DFE55A2354EB9B00DF0F30 /* RestManager.swift */,
-				04DFE55C2354FF7300DF0F30 /* Decoders.swift */,
+				04F436622357862400377BD4 /* Models */,
 			);
 			path = Moneybox;
+			sourceTree = "<group>";
+		};
+		04F43661235785D500377BD4 /* Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				04F43668235788C300377BD4 /* ProductTableViewCell.swift */,
+				04F4366A235790EA00377BD4 /* ProductTableViewController.swift */,
+				04DFE54A2354EADA00DF0F30 /* LoginController.swift */,
+			);
+			path = Controllers;
+			sourceTree = "<group>";
+		};
+		04F436622357862400377BD4 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				04DFE55A2354EB9B00DF0F30 /* RestManager.swift */,
+				04DFE55C2354FF7300DF0F30 /* Decoders.swift */,
+				04F4366E2357947300377BD4 /* Product.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		04F436632357863000377BD4 /* Storyboards */ = {
+			isa = PBXGroup;
+			children = (
+				04DFE54C2354EADA00DF0F30 /* Main.storyboard */,
+				04DFE5512354EADB00DF0F30 /* LaunchScreen.storyboard */,
+			);
+			path = Storyboards;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -145,10 +178,13 @@
 			buildActionMask = 2147483647;
 			files = (
 				04DFE55D2354FF7300DF0F30 /* Decoders.swift in Sources */,
+				04F4366F2357947300377BD4 /* Product.swift in Sources */,
 				04DFE54B2354EADA00DF0F30 /* LoginController.swift in Sources */,
 				04DFE55B2354EB9B00DF0F30 /* RestManager.swift in Sources */,
 				04DFE5472354EADA00DF0F30 /* AppDelegate.swift in Sources */,
 				04DFE5492354EADA00DF0F30 /* SceneDelegate.swift in Sources */,
+				04F4366B235790EA00377BD4 /* ProductTableViewController.swift in Sources */,
+				04F43669235788C300377BD4 /* ProductTableViewCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
