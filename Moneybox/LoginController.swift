@@ -28,6 +28,10 @@ class LoginController: UIViewController, UITextFieldDelegate {
         }
     }
     
+    @IBAction func getAll(_ sender: UIButton) {
+        getInvestorProducts()
+    }
+    
     let rest = RestManager()
     
     var bearerToken = ""
@@ -50,18 +54,19 @@ class LoginController: UIViewController, UITextFieldDelegate {
                 guard let data = results.data else { return }
                 let decoder = JSONDecoder()
                 guard let loginSuccess = try? decoder.decode(LoginSuccess.self, from: data) else { return }
+                print("\n\nLogged in successfully!\nBearer Token: \(loginSuccess.session.bearerToken)\n")
                 self.bearerToken = loginSuccess.session.bearerToken
             } else {
                 guard let data = results.data else { return }
                 let decoder = JSONDecoder()
-                guard let noAuthorization = try? decoder.decode(NoAuthorization.self, from: data) else {
-                    let invalidCredentials = try! decoder.decode(InvalidCredentials.self, from: data)
+                guard let noAuthorization = try? decoder.decode(StandardErrorResponse.self, from: data) else {
+                    let invalidCredentials = try! decoder.decode(ValidationErrorResponse.self, from: data)
                     print(invalidCredentials);
-                    //TODO: show invalidcreds error
+                    //TODO: show invalidcreds error on UI
                     return
                 }
                 print(noAuthorization)
-                //TODO: show no auth error
+                //TODO: show no auth error on UI
             }
         }
     }
@@ -69,17 +74,24 @@ class LoginController: UIViewController, UITextFieldDelegate {
     func getInvestorProducts() {
         guard let url = URL(string: "https://api-test01.moneyboxapp.com/investorproducts") else { return }
 
-        rest.requestHttpHeaders.add(value: self.bearerToken, forKey: "Authorization")
-
+        rest.requestHttpHeaders.add(value: "Bearer " + self.bearerToken, forKey: "Authorization")
+        rest.httpBodyParameters.clear()
+        
         rest.makeRequest(toURL: url, withHttpMethod: .get) { (results) in
-            print("\n\nResponse HTTP Headers:\n")
 
             if let response = results.response {
                 if response.httpStatusCode != 200 {
                     print("\nRequest failed with HTTP status code", response.httpStatusCode, "\n")
+                    guard let data = results.data else { return }
+                    let decoder = JSONDecoder()
+                    guard let authTimeout = try? decoder.decode(StandardErrorResponse.self, from: data) else { return
+                    }
+                    print(authTimeout)
+                    //TODO: show auth timeout error on UI
                     return
                 }
-
+                
+                print("\n\nResponse HTTP Headers:\n")
                 for (key, value) in response.headers.allValues() {
                    print(key, value)
                 }
@@ -88,13 +100,11 @@ class LoginController: UIViewController, UITextFieldDelegate {
             print("\n\nData:\n")
 
             if let data = results.data {
-                let decoder = JSONDecoder()
-                decoder.keyDecodingStrategy = .convertFromSnakeCase
-                guard let userData = try? decoder.decode(LoginSuccess.self, from: data) else { return }
-                print("")
+//                let decoder = JSONDecoder()
+//                decoder.keyDecodingStrategy = .convertFromSnakeCase
+//                guard let userData = try? decoder.decode(LoginSuccess.self, from: data) else { return }
+                print(data)
             }
-
-
         }
     }
 //

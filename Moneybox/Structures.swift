@@ -8,7 +8,7 @@
 
 import Foundation
 
-struct NoAuthorization: Codable {
+struct StandardErrorResponse: Codable {
     var name: String
     var message: String
     var validationErrors: [String]
@@ -20,7 +20,7 @@ struct NoAuthorization: Codable {
     }
 }
 
-struct InvalidCredentials: Codable {
+struct ValidationErrorResponse: Codable {
     var name: String
     var message: String
     var validationErrors: [ValidationError]

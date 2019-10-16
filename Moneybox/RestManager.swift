@@ -60,6 +60,10 @@ class RestManager {
         for (header, value) in requestHttpHeaders.allValues() {
             request.setValue(value, forHTTPHeaderField: header)
         }
+        if httpMethod == .get {
+            request.httpBody = Data()
+            return request
+        }
         request.httpBody = httpBody
         return request
     }
@@ -119,6 +123,10 @@ extension RestManager {
      
         mutating func add(value: String, forKey key: String) {
             values[key] = value
+        }
+        
+        mutating func clear() {
+            values = [:]
         }
      
         func value(forKey key: String) -> String? {
