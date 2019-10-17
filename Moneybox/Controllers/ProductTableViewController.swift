@@ -12,6 +12,23 @@ class ProductTableViewController: UITableViewController {
     
     var products = [Product]()
     
+    private func loadSampleProducts() {
+        
+        guard let product1 = Product(productName: "Stocks and Shares ISA", planValue: "£1000", moneybox: "£50") else {
+            fatalError("Unable to instantiate product1")
+        }
+        
+        guard let product2 = Product(productName: "General Investment Account", planValue: "£2000", moneybox: "£100") else {
+            fatalError("Unable to instantiate product2")
+        }
+        
+        guard let product3 = Product(productName: "Lifetime ISA", planValue: "£3000", moneybox: "£150") else {
+            fatalError("Unable to instantiate product3")
+        }
+        
+        products += [product1, product2, product3]
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         loadSampleProducts()
@@ -43,33 +60,15 @@ class ProductTableViewController: UITableViewController {
 
         return cell
     }
-
-    /*
+    
     // MARK: - Navigation
 
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
+        if segue.identifier == "productSegue" {
+             let productVC = segue.destination as! ProductViewController
+            productVC.productText = "test"
+            productVC.planText = "Plan Value: £999"
+            productVC.moneyText = "Moneybox: £99"
+        }
     }
-    */
-
-    
-    private func loadSampleProducts() {
-        
-        guard let product1 = Product(productName: "Stocks and Shares ISA", planValue: "£1000", moneybox: "£50") else {
-            fatalError("Unable to instantiate product1")
-        }
-        
-        guard let product2 = Product(productName: "General Investment Account", planValue: "£2000", moneybox: "£100") else {
-            fatalError("Unable to instantiate product2")
-        }
-        
-        guard let product3 = Product(productName: "Lifetime ISA", planValue: "£3000", moneybox: "£150") else {
-            fatalError("Unable to instantiate product3")
-        }
-        
-        products += [product1, product2, product3]
-    }
-
 }

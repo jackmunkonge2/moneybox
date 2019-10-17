@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		04AB44BE2358FCEE0044B7EA /* ProductViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04AB44BD2358FCEE0044B7EA /* ProductViewController.swift */; };
 		04DFE5472354EADA00DF0F30 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04DFE5462354EADA00DF0F30 /* AppDelegate.swift */; };
 		04DFE5492354EADA00DF0F30 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04DFE5482354EADA00DF0F30 /* SceneDelegate.swift */; };
 		04DFE54B2354EADA00DF0F30 /* LoginController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04DFE54A2354EADA00DF0F30 /* LoginController.swift */; };
@@ -21,6 +22,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		04AB44BD2358FCEE0044B7EA /* ProductViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductViewController.swift; sourceTree = "<group>"; };
 		04DFE5432354EADA00DF0F30 /* Moneybox.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Moneybox.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		04DFE5462354EADA00DF0F30 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		04DFE5482354EADA00DF0F30 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -83,6 +85,7 @@
 				04F43668235788C300377BD4 /* ProductTableViewCell.swift */,
 				04F4366A235790EA00377BD4 /* ProductTableViewController.swift */,
 				04DFE54A2354EADA00DF0F30 /* LoginController.swift */,
+				04AB44BD2358FCEE0044B7EA /* ProductViewController.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -183,6 +186,7 @@
 				04DFE55B2354EB9B00DF0F30 /* RestManager.swift in Sources */,
 				04DFE5472354EADA00DF0F30 /* AppDelegate.swift in Sources */,
 				04DFE5492354EADA00DF0F30 /* SceneDelegate.swift in Sources */,
+				04AB44BE2358FCEE0044B7EA /* ProductViewController.swift in Sources */,
 				04F4366B235790EA00377BD4 /* ProductTableViewController.swift in Sources */,
 				04F43669235788C300377BD4 /* ProductTableViewCell.swift in Sources */,
 			);

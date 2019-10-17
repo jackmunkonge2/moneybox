@@ -66,17 +66,13 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="ProductTableViewCell" rowHeight="130" id="v1d-Zw-61O" customClass="ProductTableViewCell" customModule="Moneybox" customModuleProvider="target">
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" accessoryType="disclosureIndicator" indentationWidth="10" reuseIdentifier="ProductTableViewCell" rowHeight="130" id="v1d-Zw-61O" customClass="ProductTableViewCell" customModule="Moneybox" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="28" width="414" height="130"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="v1d-Zw-61O" id="53F-dw-pDG">
-                                    <rect key="frame" x="0.0" y="0.0" width="414" height="130"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="383" height="130"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
-                                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="icons8-next-page-50" translatesAutoresizingMaskIntoConstraints="NO" id="H94-We-0OH">
-                                            <rect key="frame" x="353" y="45" width="41" height="41"/>
-                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        </imageView>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="This is placeholder text for now 1" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2oA-M1-Hkm">
                                             <rect key="frame" x="20" y="26" width="325" height="21"/>
                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -104,6 +100,7 @@
                                     <outlet property="moneybox" destination="iMg-8x-U3t" id="QdK-ey-2EV"/>
                                     <outlet property="planValue" destination="NWZ-hu-eDm" id="PSr-6W-qMz"/>
                                     <outlet property="productName" destination="2oA-M1-Hkm" id="auT-ZO-aec"/>
+                                    <segue destination="ijW-UE-X5y" kind="show" identifier="productSegue" id="GvP-xv-ReJ"/>
                                 </connections>
                             </tableViewCell>
                         </prototypes>
@@ -119,39 +116,36 @@
                             </connections>
                         </barButtonItem>
                     </navigationItem>
-                    <connections>
-                        <segue destination="ijW-UE-X5y" kind="show" id="KW0-YT-RoC"/>
-                    </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="pYn-ZM-41U" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
                 <exit id="0fd-Q9-6jq" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
             <point key="canvasLocation" x="1795.6521739130437" y="105.80357142857143"/>
         </scene>
-        <!--View Controller-->
+        <!--Product View Controller-->
         <scene sceneID="y2I-gK-YA7">
             <objects>
-                <viewController id="ijW-UE-X5y" sceneMemberID="viewController">
+                <viewController id="ijW-UE-X5y" customClass="ProductViewController" customModule="Moneybox" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="vtI-hj-Ma7">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Product Name" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="71F-dO-EG0">
-                                <rect key="frame" x="124" y="306" width="167" height="30"/>
+                                <rect key="frame" x="20" y="306" width="374" height="60"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="25"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Plan value: £000" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="onF-eo-1Lf">
-                                <rect key="frame" x="114" y="413" width="184" height="30"/>
+                                <rect key="frame" x="20" y="413" width="374" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="25"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Moneybox: £00" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Y9l-0G-5sw">
-                                <rect key="frame" x="120" y="467" width="173" height="30"/>
+                                <rect key="frame" x="20" y="467" width="374" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="25"/>
                                 <nil key="textColor"/>
@@ -165,14 +159,29 @@
                                 <state key="normal" title="Add £10">
                                     <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 </state>
+                                <connections>
+                                    <action selector="addMoney:" destination="ijW-UE-X5y" eventType="touchUpInside" id="qdM-3o-VAv"/>
+                                </connections>
                             </button>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <viewLayoutGuide key="safeArea" id="wXJ-IG-S4J"/>
                     </view>
-                    <navigationItem key="navigationItem" id="hRR-FS-GNT"/>
+                    <navigationItem key="navigationItem" id="hRR-FS-GNT">
+                        <barButtonItem key="rightBarButtonItem" title="Logout" style="done" id="CiU-nO-eGR">
+                            <connections>
+                                <segue destination="Q62-8m-HWT" kind="unwind" unwindAction="unwindToGlobalWithSegue:" id="f5B-4D-FCb"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
+                    <connections>
+                        <outlet property="money" destination="Y9l-0G-5sw" id="aJi-5j-kQw"/>
+                        <outlet property="name" destination="71F-dO-EG0" id="sTt-ph-WLk"/>
+                        <outlet property="value" destination="onF-eo-1Lf" id="x4z-Q3-vCD"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="wEj-gv-Nae" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+                <exit id="Q62-8m-HWT" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
             <point key="canvasLocation" x="2530.434782608696" y="105.80357142857143"/>
         </scene>
@@ -199,7 +208,6 @@
         </scene>
     </scenes>
     <resources>
-        <image name="icons8-next-page-50" width="50" height="50"/>
         <image name="moneybox_logo" width="700" height="525"/>
     </resources>
 </document>
