@@ -10,7 +10,11 @@ import UIKit
 
 class ProductTableViewController: UITableViewController {
     
+    // MARK: - Properties
+    var data: InvestorProducts?
     var products = [Product]()
+    
+    // MARK: - Table view data source
     
     private func loadSampleProducts() {
         
@@ -28,13 +32,6 @@ class ProductTableViewController: UITableViewController {
         
         products += [product1, product2, product3]
     }
-    
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        loadSampleProducts()
-    }
-
-    // MARK: - Table view data source
 
     override func numberOfSections(in tableView: UITableView) -> Int {
         return 1
@@ -70,5 +67,12 @@ class ProductTableViewController: UITableViewController {
             productVC.planText = "Plan Value: £999"
             productVC.moneyText = "Moneybox: £99"
         }
+    }
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        loadSampleProducts()
+        print("THIS IS TABLE VIEW")
+        print(data)
     }
 }

@@ -10,6 +10,8 @@ import UIKit
 
 class LoginController: UIViewController, UITextFieldDelegate {
     
+    // MARK: - Properties
+    
     let restGroup = DispatchGroup()
     
     let rest = RestManager()
@@ -17,7 +19,7 @@ class LoginController: UIViewController, UITextFieldDelegate {
     var bearerToken = ""
     
     var loggedIn = false
-    
+        
     @IBOutlet weak var email: UITextField! { didSet { email.delegate = self } }
     
     @IBOutlet weak var password: UITextField! { didSet { password.delegate = self } }
@@ -25,23 +27,7 @@ class LoginController: UIViewController, UITextFieldDelegate {
     @IBAction func unwindToGlobal(segue: UIStoryboardSegue) {
     }
     
-    @IBAction func clickLogin(_ sender: UIButton) {
-        email.resignFirstResponder()
-        password.resignFirstResponder()
-        
-        if !email.hasText || !password.hasText {
-            email.layer.borderWidth = 1
-            email.layer.borderColor = #colorLiteral(red: 1, green: 0.1491314173, blue: 0, alpha: 1)
-            password.layer.borderWidth = 1
-            password.layer.borderColor = #colorLiteral(red: 1, green: 0.1491314173, blue: 0, alpha: 1)
-        } else {
-            attemptLogin(withEmail: email.text, withPassword: password.text)
-            self.restGroup.wait()
-            if loggedIn {
-                self.performSegue(withIdentifier: "loginSegue", sender: nil)
-            }
-        }
-    }
+    // MARK: - Rest Functions
     
     func attemptLogin(withEmail email: String!, withPassword password: String!) {
         guard let url = URL(string: "https://api-test01.moneyboxapp.com/users/login") else { return }
@@ -84,8 +70,10 @@ class LoginController: UIViewController, UITextFieldDelegate {
         }
     }
     
-    func getInvestorProducts() {
-        guard let url = URL(string: "https://api-test01.moneyboxapp.com/investorproducts") else { return }
+    func getInvestorProducts() -> InvestorProducts? {
+        var investorProductResponses: InvestorProducts?
+        
+        guard let url = URL(string: "https://api-test01.moneyboxapp.com/investorproducts") else { return investorProductResponses }
 
         rest.requestHttpHeaders.add(value: "Bearer " + self.bearerToken, forKey: "Authorization")
         rest.httpBodyParameters.clear()
@@ -97,8 +85,7 @@ class LoginController: UIViewController, UITextFieldDelegate {
                     print("\nRequest failed with HTTP status code", response.httpStatusCode, "\n")
                     guard let data = results.data else { return }
                     let decoder = JSONDecoder()
-                    guard let authTimeout = try? decoder.decode(StandardErrorResponse.self, from: data) else { return
-                    }
+                    guard let authTimeout = try? decoder.decode(StandardErrorResponse.self, from: data) else { return }
                     print(authTimeout)
                     //TODO: show auth timeout error on UI
                     return
@@ -110,17 +97,43 @@ class LoginController: UIViewController, UITextFieldDelegate {
                 }
             }
 
-            print("\n\nData:\n")
-
             if let data = results.data {
                 let decoder = JSONDecoder()
                 decoder.keyDecodingStrategy = .convertFromSnakeCase
                 guard let investorProductData = try? decoder.decode(InvestorProducts.self, from: data) else { return }
-                print(investorProductData)
+                investorProductResponses = investorProductData
+            }
+        }
+        return investorProductResponses
+    }
+    
+    // MARK: - Navigation
+    
+    @IBAction func clickLogin(_ sender: UIButton) {
+        email.resignFirstResponder()
+        password.resignFirstResponder()
+        
+        if !email.hasText || !password.hasText {
+            email.layer.borderWidth = 1
+            email.layer.borderColor = #colorLiteral(red: 1, green: 0.1491314173, blue: 0, alpha: 1)
+            password.layer.borderWidth = 1
+            password.layer.borderColor = #colorLiteral(red: 1, green: 0.1491314173, blue: 0, alpha: 1)
+        } else {
+            attemptLogin(withEmail: email.text, withPassword: password.text)
+            self.restGroup.wait()
+            if loggedIn {
+                self.performSegue(withIdentifier: "loginSegue", sender: nil)
             }
         }
     }
-    
+
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "loginSegue" {
+            let productListVC = segue.destination as! ProductTableViewController
+            
+        }
+    }
+
     override func viewDidLoad() {
         super.viewDidLoad()
     }
