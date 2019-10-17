@@ -40,10 +40,6 @@ class LoginController: UIViewController, UITextFieldDelegate {
         }
     }
     
-    @IBAction func getAll(_ sender: UIButton) {
-        getInvestorProducts()
-    }
-    
     func attemptLogin(withEmail email: String!, withPassword password: String!) {
         guard let url = URL(string: "https://api-test01.moneyboxapp.com/users/login") else { return }
      
