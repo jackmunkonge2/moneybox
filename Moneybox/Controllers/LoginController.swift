@@ -10,6 +10,14 @@ import UIKit
 
 class LoginController: UIViewController, UITextFieldDelegate {
     
+    let restGroup = DispatchGroup()
+    
+    let rest = RestManager()
+    
+    var bearerToken = ""
+    
+    var loggedIn = false
+    
     @IBOutlet weak var email: UITextField! { didSet { email.delegate = self } }
     
     @IBOutlet weak var password: UITextField! { didSet { password.delegate = self } }
@@ -25,16 +33,16 @@ class LoginController: UIViewController, UITextFieldDelegate {
             password.layer.borderColor = #colorLiteral(red: 1, green: 0.1491314173, blue: 0, alpha: 1)
         } else {
             attemptLogin(withEmail: email.text, withPassword: password.text)
+            self.restGroup.wait()
+            if loggedIn {
+                self.performSegue(withIdentifier: "loginSegue", sender: nil)
+            }
         }
     }
     
     @IBAction func getAll(_ sender: UIButton) {
         getInvestorProducts()
     }
-    
-    let rest = RestManager()
-    
-    var bearerToken = ""
     
     func attemptLogin(withEmail email: String!, withPassword password: String!) {
         guard let url = URL(string: "https://api-test01.moneyboxapp.com/users/login") else { return }
@@ -47,26 +55,32 @@ class LoginController: UIViewController, UITextFieldDelegate {
         rest.httpBodyParameters.add(value: email, forKey: "Email")
         rest.httpBodyParameters.add(value: password, forKey: "Password")
         rest.httpBodyParameters.add(value: "ANYTHING", forKey: "Idfa")
-     
+        
+        self.restGroup.enter()
         rest.makeRequest(toURL: url, withHttpMethod: .post) { (results) in
-            guard let response = results.response else { return }
+            guard let response = results.response else { self.restGroup.leave(); return }
             if response.httpStatusCode == 200 {
-                guard let data = results.data else { return }
+                guard let data = results.data else { self.restGroup.leave(); return }
                 let decoder = JSONDecoder()
-                guard let loginSuccess = try? decoder.decode(LoginSuccess.self, from: data) else { return }
+                guard let loginSuccess = try? decoder.decode(LoginSuccess.self, from: data) else { self.restGroup.leave(); return }
                 print("\n\nLogged in successfully!\nBearer Token: \(loginSuccess.session.bearerToken)\n")
                 self.bearerToken = loginSuccess.session.bearerToken
+                self.loggedIn = true;
+                self.restGroup.leave()
             } else {
-                guard let data = results.data else { return }
+                guard let data = results.data else { self.restGroup.leave(); return }
                 let decoder = JSONDecoder()
                 guard let noAuthorization = try? decoder.decode(StandardErrorResponse.self, from: data) else {
                     let invalidCredentials = try! decoder.decode(ValidationErrorResponse.self, from: data)
                     print(invalidCredentials);
                     //TODO: show invalidcreds error on UI
+                    self.restGroup.leave()
                     return
                 }
                 print(noAuthorization)
                 //TODO: show no auth error on UI
+                self.restGroup.leave()
+                return
             }
         }
     }

@@ -57,6 +57,7 @@
                     <connections>
                         <outlet property="email" destination="rg5-g1-cNf" id="K8c-Si-Nnj"/>
                         <outlet property="password" destination="VoN-U0-5uC" id="6NB-cW-96r"/>
+                        <segue destination="xox-pA-y9P" kind="presentation" identifier="loginSegue" modalPresentationStyle="fullScreen" id="0k4-LJ-mV7"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
