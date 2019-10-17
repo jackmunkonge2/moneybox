@@ -22,6 +22,9 @@ class LoginController: UIViewController, UITextFieldDelegate {
     
     @IBOutlet weak var password: UITextField! { didSet { password.delegate = self } }
     
+    @IBAction func unwindToGlobal(segue: UIStoryboardSegue) {
+    }
+    
     @IBAction func clickLogin(_ sender: UIButton) {
         email.resignFirstResponder()
         password.resignFirstResponder()
