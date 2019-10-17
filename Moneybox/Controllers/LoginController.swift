@@ -12,6 +12,8 @@ class LoginController: UIViewController, UITextFieldDelegate {
     
     // MARK: - Properties
     
+    var outputData: InvestorProducts?
+    
     let restGroup = DispatchGroup()
     
     let rest = RestManager()
@@ -90,11 +92,6 @@ class LoginController: UIViewController, UITextFieldDelegate {
                     //TODO: show auth timeout error on UI
                     return
                 }
-                
-                print("\n\nResponse HTTP Headers:\n")
-                for (key, value) in response.headers.allValues() {
-                   print(key, value)
-                }
             }
 
             if let data = results.data {
@@ -130,7 +127,8 @@ class LoginController: UIViewController, UITextFieldDelegate {
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "loginSegue" {
             let productListVC = segue.destination as! ProductTableViewController
-            
+            self.outputData = self.getInvestorProducts()
+            productListVC.data = self.outputData
         }
     }
 
