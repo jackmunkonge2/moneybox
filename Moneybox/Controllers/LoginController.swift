@@ -12,9 +12,14 @@ class LoginController: UIViewController, UITextFieldDelegate {
     
     // MARK: - Properties
     
-    var outputData: InvestorProducts?
+    var outputData: InvestorProducts? {
+        didSet {
+            restGroup2.leave()
+        }
+    }
     
     let restGroup = DispatchGroup()
+    let restGroup2 = DispatchGroup()
     
     let rest = RestManager()
     
@@ -72,10 +77,10 @@ class LoginController: UIViewController, UITextFieldDelegate {
         }
     }
     
-    func getInvestorProducts() -> InvestorProducts? {
-        var investorProductResponses: InvestorProducts?
+    func getInvestorProducts() {
+        self.restGroup2.enter()
         
-        guard let url = URL(string: "https://api-test01.moneyboxapp.com/investorproducts") else { return investorProductResponses }
+        guard let url = URL(string: "https://api-test01.moneyboxapp.com/investorproducts") else { self.restGroup2.leave(); return }
 
         rest.requestHttpHeaders.add(value: "Bearer " + self.bearerToken, forKey: "Authorization")
         rest.httpBodyParameters.clear()
@@ -98,10 +103,10 @@ class LoginController: UIViewController, UITextFieldDelegate {
                 let decoder = JSONDecoder()
                 decoder.keyDecodingStrategy = .convertFromSnakeCase
                 guard let investorProductData = try? decoder.decode(InvestorProducts.self, from: data) else { return }
-                investorProductResponses = investorProductData
+                self.outputData = investorProductData
             }
         }
-        return investorProductResponses
+        return
     }
     
     // MARK: - Navigation
@@ -119,6 +124,8 @@ class LoginController: UIViewController, UITextFieldDelegate {
             attemptLogin(withEmail: email.text, withPassword: password.text)
             self.restGroup.wait()
             if loggedIn {
+                getInvestorProducts()
+                self.restGroup2.wait()
                 self.performSegue(withIdentifier: "loginSegue", sender: nil)
             }
         }
@@ -127,7 +134,6 @@ class LoginController: UIViewController, UITextFieldDelegate {
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "loginSegue" {
             let productListVC = segue.destination as! ProductTableViewController
-            self.outputData = self.getInvestorProducts()
             productListVC.data = self.outputData
         }
     }

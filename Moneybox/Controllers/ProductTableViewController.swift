@@ -72,7 +72,6 @@ class ProductTableViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         loadSampleProducts()
-        print("THIS IS TABLE VIEW")
-        print(data)
+        print(data ?? fatalError("No data received"))
     }
 }
