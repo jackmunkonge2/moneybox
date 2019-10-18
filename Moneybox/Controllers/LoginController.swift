@@ -26,7 +26,7 @@ class LoginController: UIViewController, UITextFieldDelegate {
         
     @IBOutlet weak var email: UITextField! { didSet { email.delegate = self } }
     @IBOutlet weak var password: UITextField! { didSet { password.delegate = self } }
-    @IBOutlet weak var fullname: UITextField!
+    @IBOutlet weak var fullname: UITextField! { didSet {fullname.delegate = self } }
     
     // MARK: - Rest Functions
     
@@ -111,6 +111,7 @@ class LoginController: UIViewController, UITextFieldDelegate {
     @IBAction func clickLogin(_ sender: UIButton) {
         email.resignFirstResponder()
         password.resignFirstResponder()
+        fullname.resignFirstResponder()
         
         if !email.hasText || !password.hasText {
             email.layer.borderWidth = 1
@@ -148,6 +149,11 @@ class LoginController: UIViewController, UITextFieldDelegate {
     func textFieldDidBeginEditing(_ textField: UITextField) {
         email.layer.borderWidth = 0
         password.layer.borderWidth = 0
+    }
+    
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        textField.resignFirstResponder()
+        return true
     }
 }
 
