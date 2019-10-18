@@ -11,26 +11,18 @@ import UIKit
 class ProductTableViewController: UITableViewController {
     
     // MARK: - Properties
+    var authToken: String?
     var data: InvestorProducts?
-    var products = [Product]()
+    var products = [InvestorProductResponse]()
     
     // MARK: - Table view data source
     
-    private func loadSampleProducts() {
-        
-        guard let product1 = Product(productName: "Stocks and Shares ISA", planValue: "£1000", moneybox: "£50") else {
-            fatalError("Unable to instantiate product1")
+    private func loadProducts() {
+        if let productResponses = self.data?.productResponses {
+            products = productResponses
+        } else {
+            fatalError("Couldn't load data")
         }
-        
-        guard let product2 = Product(productName: "General Investment Account", planValue: "£2000", moneybox: "£100") else {
-            fatalError("Unable to instantiate product2")
-        }
-        
-        guard let product3 = Product(productName: "Lifetime ISA", planValue: "£3000", moneybox: "£150") else {
-            fatalError("Unable to instantiate product3")
-        }
-        
-        products += [product1, product2, product3]
     }
 
     override func numberOfSections(in tableView: UITableView) -> Int {
@@ -49,11 +41,11 @@ class ProductTableViewController: UITableViewController {
             fatalError("The dequeued cell is not an instance of ProductTableViewCell.")
         }
         
-        let product = products[indexPath.row]
+        let cellData = products[indexPath.row]
         
-        cell.productName.text = product.productName
-        cell.planValue.text = product.planValue
-        cell.moneybox.text = product.moneybox
+        cell.productName.text = cellData.product.friendlyName
+        cell.planValue.text = "£\(String(cellData.planValue))"
+        cell.moneybox.text = "£\(String(cellData.moneybox))"
 
         return cell
     }
@@ -62,7 +54,7 @@ class ProductTableViewController: UITableViewController {
 
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "productSegue" {
-             let productVC = segue.destination as! ProductViewController
+            let productVC = segue.destination as! ProductViewController
             productVC.productText = "test"
             productVC.planText = "Plan Value: £999"
             productVC.moneyText = "Moneybox: £99"
@@ -71,7 +63,9 @@ class ProductTableViewController: UITableViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        loadSampleProducts()
-        print(data ?? fatalError("No data received"))
+        loadProducts()
+        print(data!)
+        print("\n")
+        print(authToken!)
     }
 }
