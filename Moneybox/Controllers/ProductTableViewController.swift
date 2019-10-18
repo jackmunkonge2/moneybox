@@ -63,8 +63,8 @@ class ProductTableViewController: UITableViewController, MyDataSendingDelegatePr
         let cellData = products[indexPath.row]
         
         cell.productName.text = cellData.product.friendlyName
-        cell.planValue.text = "£\(String(cellData.planValue))"
-        cell.moneybox.text = "£\(String(cellData.moneybox))"
+        cell.planValue.text = "Plan Value: £\(String(cellData.planValue))"
+        cell.moneybox.text = "Moneybox: £\(String(cellData.moneybox))"
 
         return cell
     }
