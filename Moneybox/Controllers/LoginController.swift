@@ -14,16 +14,16 @@ class LoginController: UIViewController, UITextFieldDelegate {
     
     var outputData: InvestorProducts? {
         didSet {
-            restGroup2.leave()
+            fetchGroup.leave()
         }
     }
     
-    let restGroup = DispatchGroup()
-    let restGroup2 = DispatchGroup()
+    let loginGroup = DispatchGroup()
+    let fetchGroup = DispatchGroup()
     
     let rest = RestManager()
     
-    var bearerToken = ""
+    var authToken = ""
     
     var loggedIn = false
         
@@ -48,41 +48,41 @@ class LoginController: UIViewController, UITextFieldDelegate {
         rest.httpBodyParameters.add(value: password, forKey: "Password")
         rest.httpBodyParameters.add(value: "ANYTHING", forKey: "Idfa")
         
-        self.restGroup.enter()
+        self.loginGroup.enter()
         rest.makeRequest(toURL: url, withHttpMethod: .post) { (results) in
-            guard let response = results.response else { self.restGroup.leave(); return }
+            guard let response = results.response else { self.loginGroup.leave(); return }
             if response.httpStatusCode == 200 {
-                guard let data = results.data else { self.restGroup.leave(); return }
+                guard let data = results.data else { self.loginGroup.leave(); return }
                 let decoder = JSONDecoder()
-                guard let loginSuccess = try? decoder.decode(LoginSuccess.self, from: data) else { self.restGroup.leave(); return }
+                guard let loginSuccess = try? decoder.decode(LoginSuccess.self, from: data) else { self.loginGroup.leave(); return }
                 print("\n\nLogged in successfully!\nBearer Token: \(loginSuccess.session.bearerToken)\n")
-                self.bearerToken = loginSuccess.session.bearerToken
+                self.authToken = loginSuccess.session.bearerToken
                 self.loggedIn = true;
-                self.restGroup.leave()
+                self.loginGroup.leave()
             } else {
-                guard let data = results.data else { self.restGroup.leave(); return }
+                guard let data = results.data else { self.loginGroup.leave(); return }
                 let decoder = JSONDecoder()
                 guard let noAuthorization = try? decoder.decode(StandardErrorResponse.self, from: data) else {
                     let invalidCredentials = try! decoder.decode(ValidationErrorResponse.self, from: data)
                     print(invalidCredentials);
                     //TODO: show invalidcreds error on UI
-                    self.restGroup.leave()
+                    self.loginGroup.leave()
                     return
                 }
                 print(noAuthorization)
                 //TODO: show no auth error on UI
-                self.restGroup.leave()
+                self.loginGroup.leave()
                 return
             }
         }
     }
     
     func getInvestorProducts() {
-        self.restGroup2.enter()
+        self.fetchGroup.enter()
         
-        guard let url = URL(string: "https://api-test01.moneyboxapp.com/investorproducts") else { self.restGroup2.leave(); return }
+        guard let url = URL(string: "https://api-test01.moneyboxapp.com/investorproducts") else { self.fetchGroup.leave(); return }
 
-        rest.requestHttpHeaders.add(value: "Bearer " + self.bearerToken, forKey: "Authorization")
+        rest.requestHttpHeaders.add(value: "Bearer " + self.authToken, forKey: "Authorization")
         rest.httpBodyParameters.clear()
         
         rest.makeRequest(toURL: url, withHttpMethod: .get) { (results) in
@@ -122,10 +122,10 @@ class LoginController: UIViewController, UITextFieldDelegate {
             password.layer.borderColor = #colorLiteral(red: 1, green: 0.1491314173, blue: 0, alpha: 1)
         } else {
             attemptLogin(withEmail: email.text, withPassword: password.text)
-            self.restGroup.wait()
+            self.loginGroup.wait()
             if loggedIn {
                 getInvestorProducts()
-                self.restGroup2.wait()
+                self.fetchGroup.wait()
                 self.performSegue(withIdentifier: "loginSegue", sender: nil)
             }
         }
@@ -135,6 +135,7 @@ class LoginController: UIViewController, UITextFieldDelegate {
         if segue.identifier == "loginSegue" {
             let productListVC = segue.destination as! ProductTableViewController
             productListVC.data = self.outputData
+            productListVC.authToken = self.authToken
         }
     }
 
