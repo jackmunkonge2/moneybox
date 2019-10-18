@@ -15,13 +15,19 @@ class ProductTableViewController: UITableViewController {
     var data: InvestorProducts?
     var products = [InvestorProductResponse]()
     
+    @IBOutlet weak var subheading: UILabel!
+    
     // MARK: - Table view data source
     
-    private func loadProducts() {
+    private func loadPageData() {
         if let productResponses = self.data?.productResponses {
             products = productResponses
         } else {
             fatalError("Couldn't load data")
+        }
+        
+        if let planValue = self.data?.totalPlanValue {
+            subheading.text = subheading.text?.replacingOccurrences(of: "0000", with: String(format: "%.2f", planValue))
         }
     }
 
@@ -69,9 +75,6 @@ class ProductTableViewController: UITableViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        loadProducts()
-        print(data!)
-        print("\n")
-        print(authToken!)
+        loadPageData()
     }
 }
