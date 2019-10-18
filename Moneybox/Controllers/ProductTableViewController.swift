@@ -8,7 +8,7 @@
 
 import UIKit
 
-class ProductTableViewController: UITableViewController {
+class ProductTableViewController: UITableViewController, MyDataSendingDelegateProtocol {
     
     // MARK: - Properties
     var authToken: String?
@@ -20,8 +20,12 @@ class ProductTableViewController: UITableViewController {
     
     // MARK: - Table view data source
     
-    private func loadPageData() {
-        if let productResponses = self.data?.productResponses {
+    func sendDataBack(myData: InvestorProducts) {
+        loadPageData(withData: myData)
+    }
+    
+    private func loadPageData(withData data: InvestorProducts?) {
+        if let productResponses = data?.productResponses {
             products = productResponses
         } else {
             fatalError("Couldn't load data")
@@ -33,9 +37,11 @@ class ProductTableViewController: UITableViewController {
             subheading.text = subheading.text?.replacingOccurrences(of: " Name", with: "")
         }
         
-        if let planValue = self.data?.totalPlanValue {
+        if let planValue = data?.totalPlanValue {
             subheading.text = subheading.text?.replacingOccurrences(of: "0000", with: String(format: "%.2f", planValue))
         }
+        
+        self.tableView.reloadData()
     }
 
     override func numberOfSections(in tableView: UITableView) -> Int {
@@ -79,11 +85,14 @@ class ProductTableViewController: UITableViewController {
             productVC.moneyText = "Moneybox: £\(String(product.moneybox))"
             productVC.productId = product.id
             productVC.authToken = self.authToken
+            
+            let secondVC: ProductViewController = segue.destination as! ProductViewController
+            secondVC.delegate = self
         }
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        loadPageData()
+        loadPageData(withData: self.data)
     }
 }

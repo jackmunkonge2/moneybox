@@ -20,23 +20,18 @@ class LoginController: UIViewController, UITextFieldDelegate {
     
     let loginGroup = DispatchGroup()
     let fetchGroup = DispatchGroup()
-    
     let rest = RestManager()
-    
     var authToken = ""
-    
     var loggedIn = false
         
     @IBOutlet weak var email: UITextField! { didSet { email.delegate = self } }
-    
     @IBOutlet weak var password: UITextField! { didSet { password.delegate = self } }
-    
     @IBOutlet weak var fullname: UITextField!
+    
+    // MARK: - Rest Functions
     
     @IBAction func unwindToGlobal(segue: UIStoryboardSegue) {
     }
-    
-    // MARK: - Rest Functions
     
     func attemptLogin(withEmail email: String!, withPassword password: String!) {
         guard let url = URL(string: "https://api-test01.moneyboxapp.com/users/login") else { return }
@@ -64,15 +59,15 @@ class LoginController: UIViewController, UITextFieldDelegate {
             } else {
                 guard let data = results.data else { self.loginGroup.leave(); return }
                 let decoder = JSONDecoder()
-                guard let noAuthorization = try? decoder.decode(StandardErrorResponse.self, from: data) else {
+                guard let authTimeout = try? decoder.decode(StandardErrorResponse.self, from: data) else {
                     let invalidCredentials = try! decoder.decode(ValidationErrorResponse.self, from: data)
                     print(invalidCredentials);
                     //TODO: show invalidcreds error on UI
                     self.loginGroup.leave()
                     return
                 }
-                print(noAuthorization)
-                //TODO: show no auth error on UI
+                print(authTimeout)
+                self.loggedIn = false
                 self.loginGroup.leave()
                 return
             }
@@ -96,7 +91,7 @@ class LoginController: UIViewController, UITextFieldDelegate {
                     let decoder = JSONDecoder()
                     guard let authTimeout = try? decoder.decode(StandardErrorResponse.self, from: data) else { return }
                     print(authTimeout)
-                    //TODO: show auth timeout error on UI
+                    self.loggedIn = false
                     return
                 }
             }
