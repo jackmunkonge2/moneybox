@@ -42,6 +42,12 @@
                                     <action selector="clickLogin:" destination="BYZ-38-t0r" eventType="touchUpInside" id="l7F-Ve-E01"/>
                                 </connections>
                             </button>
+                            <textField opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Name (Optional)" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Bc8-Ns-76J">
+                                <rect key="frame" x="36" y="361" width="342" height="34"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits" textContentType="name"/>
+                            </textField>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
@@ -49,6 +55,7 @@
                     <navigationItem key="navigationItem" id="B82-SO-SfW"/>
                     <connections>
                         <outlet property="email" destination="rg5-g1-cNf" id="K8c-Si-Nnj"/>
+                        <outlet property="fullname" destination="Bc8-Ns-76J" id="t3j-wT-k6w"/>
                         <outlet property="password" destination="VoN-U0-5uC" id="6NB-cW-96r"/>
                         <segue destination="xox-pA-y9P" kind="show" identifier="loginSegue" animates="NO" id="msI-4H-Nbe"/>
                     </connections>

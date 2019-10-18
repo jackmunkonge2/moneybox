@@ -31,6 +31,8 @@ class LoginController: UIViewController, UITextFieldDelegate {
     
     @IBOutlet weak var password: UITextField! { didSet { password.delegate = self } }
     
+    @IBOutlet weak var fullname: UITextField!
+    
     @IBAction func unwindToGlobal(segue: UIStoryboardSegue) {
     }
     
@@ -136,6 +138,9 @@ class LoginController: UIViewController, UITextFieldDelegate {
             let productListVC = segue.destination as! ProductTableViewController
             productListVC.data = self.outputData
             productListVC.authToken = self.authToken
+            if self.fullname.hasText {
+                productListVC.fullname = self.fullname.text
+            }
         }
     }
 

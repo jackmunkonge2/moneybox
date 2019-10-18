@@ -14,6 +14,7 @@ class ProductTableViewController: UITableViewController {
     var authToken: String?
     var data: InvestorProducts?
     var products = [InvestorProductResponse]()
+    var fullname: String?
     
     @IBOutlet weak var subheading: UILabel!
     
@@ -24,6 +25,12 @@ class ProductTableViewController: UITableViewController {
             products = productResponses
         } else {
             fatalError("Couldn't load data")
+        }
+        
+        if let userName = self.fullname {
+            subheading.text = subheading.text?.replacingOccurrences(of: " Name", with: " \(userName)")
+        } else {
+            subheading.text = subheading.text?.replacingOccurrences(of: " Name", with: "")
         }
         
         if let planValue = self.data?.totalPlanValue {
