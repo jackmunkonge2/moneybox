@@ -61,7 +61,7 @@
         <scene sceneID="6Eo-iu-ed5">
             <objects>
                 <tableViewController id="xox-pA-y9P" customClass="ProductTableViewController" customModule="Moneybox" customModuleProvider="target" sceneMemberID="viewController">
-                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="130" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="g3W-3j-aMp">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="singleLineEtched" rowHeight="130" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="g3W-3j-aMp">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
@@ -100,7 +100,6 @@
                                     <outlet property="moneybox" destination="iMg-8x-U3t" id="QdK-ey-2EV"/>
                                     <outlet property="planValue" destination="NWZ-hu-eDm" id="PSr-6W-qMz"/>
                                     <outlet property="productName" destination="2oA-M1-Hkm" id="auT-ZO-aec"/>
-                                    <segue destination="ijW-UE-X5y" kind="show" identifier="productSegue" id="GvP-xv-ReJ"/>
                                 </connections>
                             </tableViewCell>
                         </prototypes>
@@ -116,6 +115,9 @@
                             </connections>
                         </barButtonItem>
                     </navigationItem>
+                    <connections>
+                        <segue destination="ijW-UE-X5y" kind="show" identifier="productSegue" id="gVN-UU-xVK"/>
+                    </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="pYn-ZM-41U" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
                 <exit id="0fd-Q9-6jq" userLabel="Exit" sceneMemberID="exit"/>

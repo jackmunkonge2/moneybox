@@ -51,13 +51,19 @@ class ProductTableViewController: UITableViewController {
     }
     
     // MARK: - Navigation
+    
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        self.performSegue(withIdentifier: "productSegue", sender: indexPath.row)
+    }
 
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "productSegue" {
             let productVC = segue.destination as! ProductViewController
-            productVC.productText = "test"
-            productVC.planText = "Plan Value: £999"
-            productVC.moneyText = "Moneybox: £99"
+            let selectedRow = sender as? Int
+            let product = self.products[selectedRow!]
+            productVC.productText = product.product.friendlyName
+            productVC.planText = "Plan Value: £\(String(product.planValue))"
+            productVC.moneyText = "Moneybox: £\(String(product.moneybox))"
         }
     }
     
