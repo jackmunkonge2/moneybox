@@ -77,6 +77,8 @@ class ProductTableViewController: UITableViewController {
             productVC.productText = product.product.friendlyName
             productVC.planText = "Plan Value: £\(String(product.planValue))"
             productVC.moneyText = "Moneybox: £\(String(product.moneybox))"
+            productVC.productId = product.id
+            productVC.authToken = self.authToken
         }
     }
     

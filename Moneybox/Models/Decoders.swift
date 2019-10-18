@@ -93,3 +93,11 @@ struct InvestorProduct: Codable {
         case friendlyName = "FriendlyName"
     }
 }
+
+struct MoneyboxResponse: Codable {
+    var moneybox: Double
+    
+    private enum CodingKeys: String, CodingKey {
+        case moneybox = "Moneybox"
+    }
+}

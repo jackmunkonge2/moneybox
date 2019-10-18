@@ -143,6 +143,8 @@ class LoginController: UIViewController, UITextFieldDelegate {
             }
         }
     }
+    
+    // MARK: - UI
 
     override func viewDidLoad() {
         super.viewDidLoad()
