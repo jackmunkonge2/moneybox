@@ -28,7 +28,7 @@ class ProductViewController: UIViewController {
     var productId: Int?
     var authToken: String?
     
-    var moneyboxReturnData: MoneyboxResponse? {
+    var moneyboxReturnData: Moneybox? {
         didSet {
             addGroup.leave()
         }
@@ -40,7 +40,7 @@ class ProductViewController: UIViewController {
         }
     }
     
-    let rest = RestManager()
+    let rest = RestService()
     let addGroup = DispatchGroup()
     let updateGroup = DispatchGroup()
 
@@ -64,7 +64,7 @@ class ProductViewController: UIViewController {
                     print("\nRequest failed with HTTP status code", response.httpStatusCode, "\n")
                     guard let data = results.data else { return }
                     let decoder = JSONDecoder()
-                    guard let authTimeout = try? decoder.decode(StandardErrorResponse.self, from: data) else { return }
+                    guard let authTimeout = try? decoder.decode(StandardErrorMessage.self, from: data) else { return }
                     print(authTimeout)
                     //TODO: show auth timeout error on UI
                     return
@@ -105,7 +105,7 @@ class ProductViewController: UIViewController {
             if response.httpStatusCode == 200 {
                 guard let data = results.data else { self.addGroup.leave(); return }
                 let decoder = JSONDecoder()
-                if let moneyboxData = try? decoder.decode(MoneyboxResponse.self, from: data) {
+                if let moneyboxData = try? decoder.decode(Moneybox.self, from: data) {
                     self.moneyboxReturnData = moneyboxData
                     return
                 }
@@ -114,7 +114,7 @@ class ProductViewController: UIViewController {
         return
     }
     
-    func updateUI(withNewMoneybox moneyboxResponse: MoneyboxResponse) {
+    func updateUI(withNewMoneybox moneyboxResponse: Moneybox) {
         let newValue = Int(moneyboxResponse.moneybox)
         guard let previousValue = Int(money.text!.filter { "0"..."9" ~= $0 }) else { return }
         money.text = money.text?.replacingOccurrences(of: String(previousValue), with: String(newValue))

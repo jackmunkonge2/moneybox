@@ -13,7 +13,7 @@ class ProductTableViewController: UITableViewController, MyDataSendingDelegatePr
     // MARK: - Properties
     var authToken: String?
     var data: InvestorProducts?
-    var products = [InvestorProductResponse]()
+    var products = [ProductData]()
     var fullname: String?
     
     @IBOutlet weak var subheading: UILabel!

@@ -20,7 +20,7 @@ class LoginController: UIViewController, UITextFieldDelegate {
     
     let loginGroup = DispatchGroup()
     let fetchGroup = DispatchGroup()
-    let rest = RestManager()
+    let rest = RestService()
     var authToken = ""
     var loggedIn = false
         
@@ -29,9 +29,6 @@ class LoginController: UIViewController, UITextFieldDelegate {
     @IBOutlet weak var fullname: UITextField! { didSet {fullname.delegate = self } }
     
     // MARK: - Rest Functions
-    
-    @IBAction func unwindToGlobal(segue: UIStoryboardSegue) {
-    }
     
     func attemptLogin(withEmail email: String!, withPassword password: String!) {
         guard let url = URL(string: "https://api-test01.moneyboxapp.com/users/login") else { return }
@@ -59,8 +56,8 @@ class LoginController: UIViewController, UITextFieldDelegate {
             } else {
                 guard let data = results.data else { self.loginGroup.leave(); return }
                 let decoder = JSONDecoder()
-                guard let authTimeout = try? decoder.decode(StandardErrorResponse.self, from: data) else {
-                    let invalidCredentials = try! decoder.decode(ValidationErrorResponse.self, from: data)
+                guard let authTimeout = try? decoder.decode(StandardErrorMessage.self, from: data) else {
+                    let invalidCredentials = try! decoder.decode(ValidationErrorMessage.self, from: data)
                     print(invalidCredentials);
                     //TODO: show invalidcreds error on UI
                     self.loginGroup.leave()
@@ -89,7 +86,7 @@ class LoginController: UIViewController, UITextFieldDelegate {
                     print("\nRequest failed with HTTP status code", response.httpStatusCode, "\n")
                     guard let data = results.data else { return }
                     let decoder = JSONDecoder()
-                    guard let authTimeout = try? decoder.decode(StandardErrorResponse.self, from: data) else { return }
+                    guard let authTimeout = try? decoder.decode(StandardErrorMessage.self, from: data) else { return }
                     print(authTimeout)
                     self.loggedIn = false
                     return
@@ -108,15 +105,19 @@ class LoginController: UIViewController, UITextFieldDelegate {
     
     // MARK: - Navigation
     
+    @IBAction func unwindToGlobal(segue: UIStoryboardSegue) {
+    }
+    
     @IBAction func clickLogin(_ sender: UIButton) {
         email.resignFirstResponder()
         password.resignFirstResponder()
         fullname.resignFirstResponder()
         
         if !email.hasText || !password.hasText {
-            email.layer.borderWidth = 1
+            email.layer.borderWidth = 2
             email.layer.borderColor = #colorLiteral(red: 1, green: 0.1491314173, blue: 0, alpha: 1)
-            password.layer.borderWidth = 1
+            
+            password.layer.borderWidth = 2
             password.layer.borderColor = #colorLiteral(red: 1, green: 0.1491314173, blue: 0, alpha: 1)
         } else {
             attemptLogin(withEmail: email.text, withPassword: password.text)
