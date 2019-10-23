@@ -146,6 +146,10 @@ class LoginController: UIViewController, UITextFieldDelegate {
         super.viewDidLoad()
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        self.navigationController?.isNavigationBarHidden = true
+    }
+    
     func textFieldDidBeginEditing(_ textField: UITextField) {
         email.layer.borderWidth = 0
         password.layer.borderWidth = 0

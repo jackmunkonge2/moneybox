@@ -135,6 +135,7 @@ class ProductViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.navigationController?.isNavigationBarHidden = false
         name.text = productText
         value.text = planText
         money.text = moneyText

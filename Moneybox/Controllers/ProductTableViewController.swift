@@ -93,6 +93,7 @@ class ProductTableViewController: UITableViewController, MyDataSendingDelegatePr
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.navigationController?.isNavigationBarHidden = false
         loadPageData(withData: self.data)
     }
 }

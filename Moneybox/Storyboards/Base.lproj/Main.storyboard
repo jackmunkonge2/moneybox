@@ -15,18 +15,29 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Email" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="rg5-g1-cNf">
+                            <textField opaque="NO" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Email" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="rg5-g1-cNf">
                                 <rect key="frame" x="36" y="179" width="342" height="34"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" keyboardType="emailAddress" textContentType="email"/>
                             </textField>
-                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Password" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="VoN-U0-5uC">
+                            <textField opaque="NO" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Password" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="VoN-U0-5uC">
                                 <rect key="frame" x="36" y="221" width="342" height="34"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" secureTextEntry="YES" textContentType="password"/>
                             </textField>
+                            <textField opaque="NO" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Name (Optional)" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Bc8-Ns-76J">
+                                <rect key="frame" x="36" y="263" width="342" height="34"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits" textContentType="name"/>
+                            </textField>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="moneybox_logo" translatesAutoresizingMaskIntoConstraints="NO" id="zy5-rC-mkr">
+                                <rect key="frame" x="36" y="67" width="342" height="50"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" relation="lessThanOrEqual" constant="50" id="e1P-ri-Swo"/>
+                                </constraints>
+                            </imageView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="lzq-8F-FWi">
-                                <rect key="frame" x="156" y="365" width="102" height="42"/>
+                                <rect key="frame" x="156" y="790" width="102" height="42"/>
                                 <color key="backgroundColor" red="0.36298432949999998" green="0.73326605560000002" blue="0.72941988710000005" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="42" id="fxk-zx-GTW"/>
@@ -38,23 +49,11 @@
                                     <action selector="clickLogin:" destination="BYZ-38-t0r" eventType="touchUpInside" id="l7F-Ve-E01"/>
                                 </connections>
                             </button>
-                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Name (Optional)" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Bc8-Ns-76J">
-                                <rect key="frame" x="36" y="263" width="342" height="34"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits" textContentType="name"/>
-                            </textField>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="moneybox_logo" translatesAutoresizingMaskIntoConstraints="NO" id="zy5-rC-mkr">
-                                <rect key="frame" x="36" y="111" width="342" height="50"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" relation="lessThanOrEqual" constant="50" id="e1P-ri-Swo"/>
-                                </constraints>
-                            </imageView>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <constraints>
                             <constraint firstItem="zy5-rC-mkr" firstAttribute="leading" secondItem="rg5-g1-cNf" secondAttribute="leading" id="4IM-71-G1V"/>
                             <constraint firstItem="rg5-g1-cNf" firstAttribute="leading" secondItem="VoN-U0-5uC" secondAttribute="leading" id="COi-mj-o6L"/>
-                            <constraint firstItem="lzq-8F-FWi" firstAttribute="top" secondItem="Bc8-Ns-76J" secondAttribute="bottom" constant="68" id="EZy-F2-HEY"/>
                             <constraint firstItem="VoN-U0-5uC" firstAttribute="trailing" secondItem="Bc8-Ns-76J" secondAttribute="trailing" id="FYc-EO-q0G"/>
                             <constraint firstItem="zy5-rC-mkr" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="23" id="IkA-K4-yMI"/>
                             <constraint firstItem="zy5-rC-mkr" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="Iuq-Hz-7AX"/>
@@ -62,16 +61,18 @@
                             <constraint firstItem="lzq-8F-FWi" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="156" id="MyO-Bb-Fjb"/>
                             <constraint firstItem="Bc8-Ns-76J" firstAttribute="centerX" secondItem="lzq-8F-FWi" secondAttribute="centerX" id="R4B-ps-QcQ"/>
                             <constraint firstItem="zy5-rC-mkr" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="36" id="adA-n7-MK8"/>
-                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="lzq-8F-FWi" secondAttribute="bottom" constant="10" id="cGw-SX-qjx"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="lzq-8F-FWi" secondAttribute="bottom" priority="750" constant="30" id="eoG-3s-2gw"/>
                             <constraint firstItem="rg5-g1-cNf" firstAttribute="top" secondItem="zy5-rC-mkr" secondAttribute="bottom" constant="18" id="jlW-Wn-ENg"/>
                             <constraint firstItem="VoN-U0-5uC" firstAttribute="top" secondItem="rg5-g1-cNf" secondAttribute="bottom" constant="8" id="jsb-OI-sAc"/>
                             <constraint firstItem="zy5-rC-mkr" firstAttribute="trailing" secondItem="rg5-g1-cNf" secondAttribute="trailing" id="jxO-Qi-xE0"/>
                             <constraint firstItem="VoN-U0-5uC" firstAttribute="leading" secondItem="Bc8-Ns-76J" secondAttribute="leading" id="lJg-eA-nsR"/>
                             <constraint firstItem="rg5-g1-cNf" firstAttribute="trailing" secondItem="VoN-U0-5uC" secondAttribute="trailing" id="n7U-ng-ubd"/>
+                            <constraint firstItem="lzq-8F-FWi" firstAttribute="top" relation="lessThanOrEqual" secondItem="Bc8-Ns-76J" secondAttribute="bottom" constant="503" id="opz-AD-FMJ"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
                     <navigationItem key="navigationItem" id="B82-SO-SfW"/>
+                    <nil key="simulatedTopBarMetrics"/>
                     <connections>
                         <outlet property="email" destination="rg5-g1-cNf" id="K8c-Si-Nnj"/>
                         <outlet property="fullname" destination="Bc8-Ns-76J" id="t3j-wT-k6w"/>
@@ -88,7 +89,7 @@
             <objects>
                 <tableViewController id="xox-pA-y9P" customClass="ProductTableViewController" customModule="Moneybox" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="130" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="g3W-3j-aMp">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="808"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <label key="tableHeaderView" opaque="NO" userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="U2A-lQ-GOy">
@@ -179,6 +180,7 @@
                             </connections>
                         </barButtonItem>
                     </navigationItem>
+                    <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" translucent="NO" prompted="NO"/>
                     <connections>
                         <outlet property="subheading" destination="U2A-lQ-GOy" id="NFg-h4-uc0"/>
                         <segue destination="ijW-UE-X5y" kind="show" identifier="productSegue" id="gVN-UU-xVK"/>
@@ -194,29 +196,29 @@
             <objects>
                 <viewController id="ijW-UE-X5y" customClass="ProductViewController" customModule="Moneybox" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="vtI-hj-Ma7">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="808"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Product Name" textAlignment="center" lineBreakMode="wordWrap" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="71F-dO-EG0">
-                                <rect key="frame" x="20" y="138" width="374" height="30"/>
+                                <rect key="frame" x="20" y="50" width="374" height="30"/>
                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="25"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Plan value: £000" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="onF-eo-1Lf">
-                                <rect key="frame" x="20" y="211" width="374" height="30"/>
+                                <rect key="frame" x="20" y="123" width="374" height="30"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="25"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Moneybox: £00" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Y9l-0G-5sw">
-                                <rect key="frame" x="20" y="256" width="374" height="30"/>
+                                <rect key="frame" x="20" y="168" width="374" height="30"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="25"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="QRe-Hz-n4G">
-                                <rect key="frame" x="131" y="336" width="152" height="39"/>
+                                <rect key="frame" x="131" y="248" width="152" height="39"/>
                                 <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="22"/>
                                 <state key="normal" title="Add £10">
