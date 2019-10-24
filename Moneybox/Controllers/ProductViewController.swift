@@ -47,17 +47,18 @@ class ProductViewController: UIViewController {
     // MARK: - Functions
     
     func refreshPageData() {
-        updateGroup.enter()
-        guard let url = URL(string: "https://api-test01.moneyboxapp.com/investorproducts") else { self.updateGroup.leave(); return }
         
-        rest.requestHttpHeaders.add(value: "3a97b932a9d449c981b595", forKey: "Appid")
-        rest.requestHttpHeaders.add(value: "application/json", forKey: "Content-Type")
-        rest.requestHttpHeaders.add(value: "5.10.0", forKey: "appVersion")
-        rest.requestHttpHeaders.add(value: "3.0.0", forKey: "apiVersion")
+        updateGroup.enter()
+        guard let url = URL(string: "/investorproducts", relativeTo: Constants.baseURL) else { self.updateGroup.leave(); return }
+        
+        rest.requestHttpHeaders.add(value: Constants.appId, forKey: "Appid")
+        rest.requestHttpHeaders.add(value: Constants.contentType, forKey: "Content-Type")
+        rest.requestHttpHeaders.add(value: Constants.appVersion, forKey: "appVersion")
+        rest.requestHttpHeaders.add(value: Constants.apiVersion, forKey: "apiVersion")
         rest.requestHttpHeaders.add(value: "Bearer " + self.authToken!, forKey: "Authorization")
         rest.httpBodyParameters.clear()
         
-        rest.makeRequest(toURL: url, withHttpMethod: .get) { (results) in
+        rest.makeRequest(toURL: url.absoluteURL, withHttpMethod: .get) { (results) in
             
             if let response = results.response {
                 if response.httpStatusCode != 200 {
@@ -88,19 +89,20 @@ class ProductViewController: UIViewController {
     }
     
     func oneOffPayment() {
-        addGroup.enter()
-        guard let url = URL(string: "https://api-test01.moneyboxapp.com/oneoffpayments") else { return }
         
-        rest.requestHttpHeaders.add(value: "3a97b932a9d449c981b595", forKey: "Appid")
-        rest.requestHttpHeaders.add(value: "application/json", forKey: "Content-Type")
-        rest.requestHttpHeaders.add(value: "5.10.0", forKey: "appVersion")
-        rest.requestHttpHeaders.add(value: "3.0.0", forKey: "apiVersion")
+        addGroup.enter()
+        guard let url = URL(string: "/oneoffpayments", relativeTo: Constants.baseURL) else { return }
+        
+        rest.requestHttpHeaders.add(value: Constants.appId, forKey: "Appid")
+        rest.requestHttpHeaders.add(value: Constants.contentType, forKey: "Content-Type")
+        rest.requestHttpHeaders.add(value: Constants.appVersion, forKey: "appVersion")
+        rest.requestHttpHeaders.add(value: Constants.apiVersion, forKey: "apiVersion")
         rest.requestHttpHeaders.add(value: "Bearer " + self.authToken!, forKey: "Authorization")
         
-        rest.httpBodyParameters.add(value: "10", forKey: "Amount")
+        rest.httpBodyParameters.add(value: Constants.moneybox, forKey: "Amount")
         rest.httpBodyParameters.add(value: String(productId!), forKey: "InvestorProductId")
         
-        rest.makeRequest(toURL: url, withHttpMethod: .post) { (results) in
+        rest.makeRequest(toURL: url.absoluteURL, withHttpMethod: .post) { (results) in
             guard let response = results.response else { self.addGroup.leave(); return }
             if response.httpStatusCode == 200 {
                 guard let data = results.data else { self.addGroup.leave(); return }

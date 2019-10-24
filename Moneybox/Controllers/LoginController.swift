@@ -31,19 +31,20 @@ class LoginController: UIViewController, UITextFieldDelegate {
     // MARK: - Rest Functions
     
     func attemptLogin(withEmail email: String!, withPassword password: String!) {
-        guard let url = URL(string: "https://api-test01.moneyboxapp.com/users/login") else { return }
+
+        guard let url = URL(string: "/users/login", relativeTo: Constants.baseURL) else { return }
      
-        rest.requestHttpHeaders.add(value: "3a97b932a9d449c981b595", forKey: "Appid")
-        rest.requestHttpHeaders.add(value: "application/json", forKey: "Content-Type")
-        rest.requestHttpHeaders.add(value: "5.10.0", forKey: "appVersion")
-        rest.requestHttpHeaders.add(value: "3.0.0", forKey: "apiVersion")
+        rest.requestHttpHeaders.add(value: Constants.appId, forKey: "Appid")
+        rest.requestHttpHeaders.add(value: Constants.contentType, forKey: "Content-Type")
+        rest.requestHttpHeaders.add(value: Constants.appVersion, forKey: "appVersion")
+        rest.requestHttpHeaders.add(value: Constants.apiVersion, forKey: "apiVersion")
         
         rest.httpBodyParameters.add(value: email, forKey: "Email")
         rest.httpBodyParameters.add(value: password, forKey: "Password")
-        rest.httpBodyParameters.add(value: "ANYTHING", forKey: "Idfa")
+        rest.httpBodyParameters.add(value: Constants.idfa, forKey: "Idfa")
         
         self.loginGroup.enter()
-        rest.makeRequest(toURL: url, withHttpMethod: .post) { (results) in
+        rest.makeRequest(toURL: url.absoluteURL, withHttpMethod: .post) { (results) in
             guard let response = results.response else { self.loginGroup.leave(); return }
             if response.httpStatusCode == 200 {
                 guard let data = results.data else { self.loginGroup.leave(); return }
@@ -72,14 +73,14 @@ class LoginController: UIViewController, UITextFieldDelegate {
     }
     
     func getInvestorProducts() {
-        self.fetchGroup.enter()
         
-        guard let url = URL(string: "https://api-test01.moneyboxapp.com/investorproducts") else { self.fetchGroup.leave(); return }
+        self.fetchGroup.enter()
+        guard let url = URL(string: "/investorproducts", relativeTo: Constants.baseURL) else { self.fetchGroup.leave(); return }
 
         rest.requestHttpHeaders.add(value: "Bearer " + self.authToken, forKey: "Authorization")
         rest.httpBodyParameters.clear()
         
-        rest.makeRequest(toURL: url, withHttpMethod: .get) { (results) in
+        rest.makeRequest(toURL: url.absoluteURL, withHttpMethod: .get) { (results) in
 
             if let response = results.response {
                 if response.httpStatusCode != 200 {

@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		040E23E72362433A0003E6D2 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 040E23E62362433A0003E6D2 /* Constants.swift */; };
 		040FA38C2360E7BA00563D1E /* HttpMethods.swift in Sources */ = {isa = PBXBuildFile; fileRef = 040FA38B2360E7BA00563D1E /* HttpMethods.swift */; };
 		040FA38E2360E8C500563D1E /* CustomError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 040FA38D2360E8C500563D1E /* CustomError.swift */; };
 		040FA3902360EA9300563D1E /* HttpResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 040FA38F2360EA9300563D1E /* HttpResponse.swift */; };
@@ -29,6 +30,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		040E23E62362433A0003E6D2 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		040FA38B2360E7BA00563D1E /* HttpMethods.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HttpMethods.swift; sourceTree = "<group>"; };
 		040FA38D2360E8C500563D1E /* CustomError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomError.swift; sourceTree = "<group>"; };
 		040FA38F2360EA9300563D1E /* HttpResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HttpResponse.swift; sourceTree = "<group>"; };
@@ -117,6 +119,7 @@
 				040FA3952360F43C00563D1E /* LoginSuccess.swift */,
 				040FA3972360F51800563D1E /* InvestorProducts.swift */,
 				040FA3992360F53300563D1E /* Moneybox.swift */,
+				040E23E62362433A0003E6D2 /* Constants.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -202,6 +205,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				04DFE55D2354FF7300DF0F30 /* ErrorMessage.swift in Sources */,
+				040E23E72362433A0003E6D2 /* Constants.swift in Sources */,
 				040FA3962360F43C00563D1E /* LoginSuccess.swift in Sources */,
 				04DFE54B2354EADA00DF0F30 /* LoginController.swift in Sources */,
 				040FA38C2360E7BA00563D1E /* HttpMethods.swift in Sources */,
