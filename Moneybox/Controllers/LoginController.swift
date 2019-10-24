@@ -14,12 +14,11 @@ class LoginController: UIViewController, UITextFieldDelegate {
     
     var outputData: InvestorProducts? {
         didSet {
-            fetchGroup.leave()
+            restThread.leave()
         }
     }
     
-    let loginGroup = DispatchGroup()
-    let fetchGroup = DispatchGroup()
+    let restThread = DispatchGroup()
     let rest = RestService()
     var authToken = ""
     var loggedIn = false
@@ -43,30 +42,30 @@ class LoginController: UIViewController, UITextFieldDelegate {
         rest.httpBodyParameters.add(value: password, forKey: "Password")
         rest.httpBodyParameters.add(value: Constants.idfa, forKey: "Idfa")
         
-        self.loginGroup.enter()
+        self.restThread.enter()
         rest.makeRequest(toURL: url.absoluteURL, withHttpMethod: .post) { (results) in
-            guard let response = results.response else { self.loginGroup.leave(); return }
+            guard let response = results.response else { self.restThread.leave(); return }
             if response.httpStatusCode == 200 {
-                guard let data = results.data else { self.loginGroup.leave(); return }
+                guard let data = results.data else { self.restThread.leave(); return }
                 let decoder = JSONDecoder()
-                guard let loginSuccess = try? decoder.decode(LoginSuccess.self, from: data) else { self.loginGroup.leave(); return }
+                guard let loginSuccess = try? decoder.decode(LoginSuccess.self, from: data) else { self.restThread.leave(); return }
                 print("\n\nLogged in successfully!\nBearer Token: \(loginSuccess.session.bearerToken)\n")
                 self.authToken = loginSuccess.session.bearerToken
                 self.loggedIn = true;
-                self.loginGroup.leave()
+                self.restThread.leave()
             } else {
-                guard let data = results.data else { self.loginGroup.leave(); return }
+                guard let data = results.data else { self.restThread.leave(); return }
                 let decoder = JSONDecoder()
                 guard let authTimeout = try? decoder.decode(StandardErrorMessage.self, from: data) else {
                     let invalidCredentials = try! decoder.decode(ValidationErrorMessage.self, from: data)
                     print(invalidCredentials);
                     //TODO: show invalidcreds error on UI
-                    self.loginGroup.leave()
+                    self.restThread.leave()
                     return
                 }
                 print(authTimeout)
                 self.loggedIn = false
-                self.loginGroup.leave()
+                self.restThread.leave()
                 return
             }
         }
@@ -74,8 +73,8 @@ class LoginController: UIViewController, UITextFieldDelegate {
     
     func getInvestorProducts() {
         
-        self.fetchGroup.enter()
-        guard let url = URL(string: "/investorproducts", relativeTo: Constants.baseURL) else { self.fetchGroup.leave(); return }
+        self.restThread.enter()
+        guard let url = URL(string: "/investorproducts", relativeTo: Constants.baseURL) else { self.restThread.leave(); return }
 
         rest.requestHttpHeaders.add(value: "Bearer " + self.authToken, forKey: "Authorization")
         rest.httpBodyParameters.clear()
@@ -122,10 +121,10 @@ class LoginController: UIViewController, UITextFieldDelegate {
             password.layer.borderColor = #colorLiteral(red: 1, green: 0.1491314173, blue: 0, alpha: 1)
         } else {
             attemptLogin(withEmail: email.text, withPassword: password.text)
-            self.loginGroup.wait()
+            self.restThread.wait()
             if loggedIn {
                 getInvestorProducts()
-                self.fetchGroup.wait()
+                self.restThread.wait()
                 self.performSegue(withIdentifier: "loginSegue", sender: nil)
             }
         }

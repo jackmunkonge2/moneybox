@@ -30,26 +30,25 @@ class ProductViewController: UIViewController {
     
     var moneyboxReturnData: Moneybox? {
         didSet {
-            addGroup.leave()
+            restThread.leave()
         }
     }
     
     var updatedProductsData: InvestorProducts? {
         didSet {
-            updateGroup.leave()
+            restThread.leave()
         }
     }
     
     let rest = RestService()
-    let addGroup = DispatchGroup()
-    let updateGroup = DispatchGroup()
+    let restThread = DispatchGroup()
 
     // MARK: - Functions
     
     func refreshPageData() {
         
-        updateGroup.enter()
-        guard let url = URL(string: "/investorproducts", relativeTo: Constants.baseURL) else { self.updateGroup.leave(); return }
+        restThread.enter()
+        guard let url = URL(string: "/investorproducts", relativeTo: Constants.baseURL) else { self.restThread.leave(); return }
         
         rest.requestHttpHeaders.add(value: Constants.appId, forKey: "Appid")
         rest.requestHttpHeaders.add(value: Constants.contentType, forKey: "Content-Type")
@@ -84,13 +83,13 @@ class ProductViewController: UIViewController {
 
     @IBAction func addMoney(_ sender: UIButton) {
         oneOffPayment()
-        addGroup.wait()
+        restThread.wait()
         updateUI(withNewMoneybox: moneyboxReturnData!)
     }
     
     func oneOffPayment() {
         
-        addGroup.enter()
+        restThread.enter()
         guard let url = URL(string: "/oneoffpayments", relativeTo: Constants.baseURL) else { return }
         
         rest.requestHttpHeaders.add(value: Constants.appId, forKey: "Appid")
@@ -103,9 +102,9 @@ class ProductViewController: UIViewController {
         rest.httpBodyParameters.add(value: String(productId!), forKey: "InvestorProductId")
         
         rest.makeRequest(toURL: url.absoluteURL, withHttpMethod: .post) { (results) in
-            guard let response = results.response else { self.addGroup.leave(); return }
+            guard let response = results.response else { self.restThread.leave(); return }
             if response.httpStatusCode == 200 {
-                guard let data = results.data else { self.addGroup.leave(); return }
+                guard let data = results.data else { self.restThread.leave(); return }
                 let decoder = JSONDecoder()
                 if let moneyboxData = try? decoder.decode(Moneybox.self, from: data) {
                     self.moneyboxReturnData = moneyboxData
@@ -127,7 +126,7 @@ class ProductViewController: UIViewController {
     override func viewWillDisappear(_ animated: Bool) {
         if self.delegate != nil {
             refreshPageData()
-            updateGroup.wait()
+            restThread.wait()
             let dataToBeSent = self.updatedProductsData
             self.delegate?.sendDataBack(myData: dataToBeSent!)
         }
