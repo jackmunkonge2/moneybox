@@ -65,6 +65,17 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		040E23E8236253880003E6D2 /* Decoders */ = {
+			isa = PBXGroup;
+			children = (
+				04DFE55C2354FF7300DF0F30 /* ErrorMessage.swift */,
+				040FA3952360F43C00563D1E /* LoginSuccess.swift */,
+				040FA3972360F51800563D1E /* InvestorProducts.swift */,
+				040FA3992360F53300563D1E /* Moneybox.swift */,
+			);
+			path = Decoders;
+			sourceTree = "<group>";
+		};
 		04DFE53A2354EADA00DF0F30 = {
 			isa = PBXGroup;
 			children = (
@@ -110,15 +121,12 @@
 			isa = PBXGroup;
 			children = (
 				04DFE55A2354EB9B00DF0F30 /* RestService.swift */,
-				04DFE55C2354FF7300DF0F30 /* ErrorMessage.swift */,
+				040E23E8236253880003E6D2 /* Decoders */,
 				040FA38B2360E7BA00563D1E /* HttpMethods.swift */,
 				040FA38D2360E8C500563D1E /* CustomError.swift */,
 				040FA38F2360EA9300563D1E /* HttpResponse.swift */,
 				040FA3912360EC0500563D1E /* RestEntity.swift */,
 				040FA3932360EE0800563D1E /* HttpResults.swift */,
-				040FA3952360F43C00563D1E /* LoginSuccess.swift */,
-				040FA3972360F51800563D1E /* InvestorProducts.swift */,
-				040FA3992360F53300563D1E /* Moneybox.swift */,
 				040E23E62362433A0003E6D2 /* Constants.swift */,
 			);
 			path = Models;
