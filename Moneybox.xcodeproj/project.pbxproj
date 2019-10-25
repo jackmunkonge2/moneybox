@@ -28,7 +28,19 @@
 		04DFE55D2354FF7300DF0F30 /* ErrorMessage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04DFE55C2354FF7300DF0F30 /* ErrorMessage.swift */; };
 		04F43669235788C300377BD4 /* ProductTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04F43668235788C300377BD4 /* ProductTableViewCell.swift */; };
 		04F4366B235790EA00377BD4 /* ProductTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04F4366A235790EA00377BD4 /* ProductTableViewController.swift */; };
+		04FBBE30236357AE00D0EDDD /* DecoderTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04FBBE2F236357AE00D0EDDD /* DecoderTests.swift */; };
+		04FBBE3823635CC000D0EDDD /* HttpModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04FBBE3723635CC000D0EDDD /* HttpModels.swift */; };
 /* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		04FBBE32236357AE00D0EDDD /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 04DFE53B2354EADA00DF0F30 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 04DFE5422354EADA00DF0F30;
+			remoteInfo = Moneybox;
+		};
+/* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
 		040E23E62362433A0003E6D2 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
@@ -54,10 +66,21 @@
 		04DFE55C2354FF7300DF0F30 /* ErrorMessage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorMessage.swift; sourceTree = "<group>"; };
 		04F43668235788C300377BD4 /* ProductTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductTableViewCell.swift; sourceTree = "<group>"; };
 		04F4366A235790EA00377BD4 /* ProductTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductTableViewController.swift; sourceTree = "<group>"; };
+		04FBBE2D236357AE00D0EDDD /* UnitTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = UnitTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		04FBBE2F236357AE00D0EDDD /* DecoderTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DecoderTests.swift; sourceTree = "<group>"; };
+		04FBBE31236357AE00D0EDDD /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		04FBBE3723635CC000D0EDDD /* HttpModels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HttpModels.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
 		04DFE5402354EADA00DF0F30 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		04FBBE2A236357AE00D0EDDD /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -91,6 +114,7 @@
 			isa = PBXGroup;
 			children = (
 				04DFE5452354EADA00DF0F30 /* Moneybox */,
+				04FBBE2E236357AE00D0EDDD /* UnitTests */,
 				04DFE5442354EADA00DF0F30 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -99,6 +123,7 @@
 			isa = PBXGroup;
 			children = (
 				04DFE5432354EADA00DF0F30 /* Moneybox.app */,
+				04FBBE2D236357AE00D0EDDD /* UnitTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -152,6 +177,24 @@
 			path = Storyboards;
 			sourceTree = "<group>";
 		};
+		04FBBE2E236357AE00D0EDDD /* UnitTests */ = {
+			isa = PBXGroup;
+			children = (
+				04FBBE3C2363A8AF00D0EDDD /* Builders */,
+				04FBBE2F236357AE00D0EDDD /* DecoderTests.swift */,
+				04FBBE3723635CC000D0EDDD /* HttpModels.swift */,
+				04FBBE31236357AE00D0EDDD /* Info.plist */,
+			);
+			path = UnitTests;
+			sourceTree = "<group>";
+		};
+		04FBBE3C2363A8AF00D0EDDD /* Builders */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Builders;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -172,6 +215,24 @@
 			productReference = 04DFE5432354EADA00DF0F30 /* Moneybox.app */;
 			productType = "com.apple.product-type.application";
 		};
+		04FBBE2C236357AE00D0EDDD /* UnitTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 04FBBE36236357AE00D0EDDD /* Build configuration list for PBXNativeTarget "UnitTests" */;
+			buildPhases = (
+				04FBBE29236357AE00D0EDDD /* Sources */,
+				04FBBE2A236357AE00D0EDDD /* Frameworks */,
+				04FBBE2B236357AE00D0EDDD /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				04FBBE33236357AE00D0EDDD /* PBXTargetDependency */,
+			);
+			name = UnitTests;
+			productName = UnitTests;
+			productReference = 04FBBE2D236357AE00D0EDDD /* UnitTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -184,6 +245,10 @@
 				TargetAttributes = {
 					04DFE5422354EADA00DF0F30 = {
 						CreatedOnToolsVersion = 11.1;
+					};
+					04FBBE2C236357AE00D0EDDD = {
+						CreatedOnToolsVersion = 11.1;
+						TestTargetID = 04DFE5422354EADA00DF0F30;
 					};
 				};
 			};
@@ -201,6 +266,7 @@
 			projectRoot = "";
 			targets = (
 				04DFE5422354EADA00DF0F30 /* Moneybox */,
+				04FBBE2C236357AE00D0EDDD /* UnitTests */,
 			);
 		};
 /* End PBXProject section */
@@ -213,6 +279,13 @@
 				04DFE5532354EADB00DF0F30 /* LaunchScreen.storyboard in Resources */,
 				04DFE5502354EADB00DF0F30 /* Assets.xcassets in Resources */,
 				04DFE54E2354EADA00DF0F30 /* Main.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		04FBBE2B236357AE00D0EDDD /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -244,7 +317,24 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		04FBBE29236357AE00D0EDDD /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				04FBBE30236357AE00D0EDDD /* DecoderTests.swift in Sources */,
+				04FBBE3823635CC000D0EDDD /* HttpModels.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		04FBBE33236357AE00D0EDDD /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 04DFE5422354EADA00DF0F30 /* Moneybox */;
+			targetProxy = 04FBBE32236357AE00D0EDDD /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
 		04DFE54C2354EADA00DF0F30 /* Main.storyboard */ = {
@@ -416,6 +506,46 @@
 			};
 			name = Release;
 		};
+		04FBBE34236357AE00D0EDDD /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = Q79HY7288P;
+				INFOPLIST_FILE = UnitTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.jackmunkonge.UnitTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Moneybox.app/Moneybox";
+			};
+			name = Debug;
+		};
+		04FBBE35236357AE00D0EDDD /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = Q79HY7288P;
+				INFOPLIST_FILE = UnitTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.jackmunkonge.UnitTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Moneybox.app/Moneybox";
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -433,6 +563,15 @@
 			buildConfigurations = (
 				04DFE5582354EADB00DF0F30 /* Debug */,
 				04DFE5592354EADB00DF0F30 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		04FBBE36236357AE00D0EDDD /* Build configuration list for PBXNativeTarget "UnitTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				04FBBE34236357AE00D0EDDD /* Debug */,
+				04FBBE35236357AE00D0EDDD /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
