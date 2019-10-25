@@ -8,7 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		040E23E72362433A0003E6D2 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 040E23E62362433A0003E6D2 /* Constants.swift */; };
-		040FA38C2360E7BA00563D1E /* HttpMethods.swift in Sources */ = {isa = PBXBuildFile; fileRef = 040FA38B2360E7BA00563D1E /* HttpMethods.swift */; };
+		040FA38C2360E7BA00563D1E /* HttpRequestType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 040FA38B2360E7BA00563D1E /* HttpRequestType.swift */; };
 		040FA38E2360E8C500563D1E /* CustomError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 040FA38D2360E8C500563D1E /* CustomError.swift */; };
 		040FA3902360EA9300563D1E /* HttpResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 040FA38F2360EA9300563D1E /* HttpResponse.swift */; };
 		040FA3922360EC0500563D1E /* RestEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 040FA3912360EC0500563D1E /* RestEntity.swift */; };
@@ -17,6 +17,7 @@
 		040FA3982360F51800563D1E /* InvestorProducts.swift in Sources */ = {isa = PBXBuildFile; fileRef = 040FA3972360F51800563D1E /* InvestorProducts.swift */; };
 		040FA39A2360F53300563D1E /* Moneybox.swift in Sources */ = {isa = PBXBuildFile; fileRef = 040FA3992360F53300563D1E /* Moneybox.swift */; };
 		04AB44BE2358FCEE0044B7EA /* ProductViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04AB44BD2358FCEE0044B7EA /* ProductViewController.swift */; };
+		04CECCBE236341550027D6B2 /* DecodeUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04CECCBD236341550027D6B2 /* DecodeUtil.swift */; };
 		04DFE5472354EADA00DF0F30 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04DFE5462354EADA00DF0F30 /* AppDelegate.swift */; };
 		04DFE5492354EADA00DF0F30 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04DFE5482354EADA00DF0F30 /* SceneDelegate.swift */; };
 		04DFE54B2354EADA00DF0F30 /* LoginController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04DFE54A2354EADA00DF0F30 /* LoginController.swift */; };
@@ -31,7 +32,7 @@
 
 /* Begin PBXFileReference section */
 		040E23E62362433A0003E6D2 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
-		040FA38B2360E7BA00563D1E /* HttpMethods.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HttpMethods.swift; sourceTree = "<group>"; };
+		040FA38B2360E7BA00563D1E /* HttpRequestType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HttpRequestType.swift; sourceTree = "<group>"; };
 		040FA38D2360E8C500563D1E /* CustomError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomError.swift; sourceTree = "<group>"; };
 		040FA38F2360EA9300563D1E /* HttpResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HttpResponse.swift; sourceTree = "<group>"; };
 		040FA3912360EC0500563D1E /* RestEntity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RestEntity.swift; sourceTree = "<group>"; };
@@ -40,6 +41,7 @@
 		040FA3972360F51800563D1E /* InvestorProducts.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InvestorProducts.swift; sourceTree = "<group>"; };
 		040FA3992360F53300563D1E /* Moneybox.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Moneybox.swift; sourceTree = "<group>"; };
 		04AB44BD2358FCEE0044B7EA /* ProductViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductViewController.swift; sourceTree = "<group>"; };
+		04CECCBD236341550027D6B2 /* DecodeUtil.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DecodeUtil.swift; sourceTree = "<group>"; };
 		04DFE5432354EADA00DF0F30 /* Moneybox.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Moneybox.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		04DFE5462354EADA00DF0F30 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		04DFE5482354EADA00DF0F30 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -76,6 +78,15 @@
 			path = Decoders;
 			sourceTree = "<group>";
 		};
+		04CECCBB23633CB70027D6B2 /* Services */ = {
+			isa = PBXGroup;
+			children = (
+				04DFE55A2354EB9B00DF0F30 /* RestService.swift */,
+				04CECCBD236341550027D6B2 /* DecodeUtil.swift */,
+			);
+			path = Services;
+			sourceTree = "<group>";
+		};
 		04DFE53A2354EADA00DF0F30 = {
 			isa = PBXGroup;
 			children = (
@@ -95,12 +106,13 @@
 		04DFE5452354EADA00DF0F30 /* Moneybox */ = {
 			isa = PBXGroup;
 			children = (
-				04F43661235785D500377BD4 /* Controllers */,
 				04DFE5462354EADA00DF0F30 /* AppDelegate.swift */,
 				04DFE5482354EADA00DF0F30 /* SceneDelegate.swift */,
-				04F436632357863000377BD4 /* Storyboards */,
 				04DFE54F2354EADB00DF0F30 /* Assets.xcassets */,
 				04DFE5542354EADB00DF0F30 /* Info.plist */,
+				04CECCBB23633CB70027D6B2 /* Services */,
+				04F43661235785D500377BD4 /* Controllers */,
+				04F436632357863000377BD4 /* Storyboards */,
 				04F436622357862400377BD4 /* Models */,
 			);
 			path = Moneybox;
@@ -120,9 +132,8 @@
 		04F436622357862400377BD4 /* Models */ = {
 			isa = PBXGroup;
 			children = (
-				04DFE55A2354EB9B00DF0F30 /* RestService.swift */,
 				040E23E8236253880003E6D2 /* Decoders */,
-				040FA38B2360E7BA00563D1E /* HttpMethods.swift */,
+				040FA38B2360E7BA00563D1E /* HttpRequestType.swift */,
 				040FA38D2360E8C500563D1E /* CustomError.swift */,
 				040FA38F2360EA9300563D1E /* HttpResponse.swift */,
 				040FA3912360EC0500563D1E /* RestEntity.swift */,
@@ -216,9 +227,10 @@
 				040E23E72362433A0003E6D2 /* Constants.swift in Sources */,
 				040FA3962360F43C00563D1E /* LoginSuccess.swift in Sources */,
 				04DFE54B2354EADA00DF0F30 /* LoginController.swift in Sources */,
-				040FA38C2360E7BA00563D1E /* HttpMethods.swift in Sources */,
+				040FA38C2360E7BA00563D1E /* HttpRequestType.swift in Sources */,
 				04DFE55B2354EB9B00DF0F30 /* RestService.swift in Sources */,
 				04DFE5472354EADA00DF0F30 /* AppDelegate.swift in Sources */,
+				04CECCBE236341550027D6B2 /* DecodeUtil.swift in Sources */,
 				040FA38E2360E8C500563D1E /* CustomError.swift in Sources */,
 				040FA3942360EE0800563D1E /* HttpResults.swift in Sources */,
 				04DFE5492354EADA00DF0F30 /* SceneDelegate.swift in Sources */,

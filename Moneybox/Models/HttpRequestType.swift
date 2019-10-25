@@ -1,5 +1,5 @@
 //
-//  HttpMethods.swift
+//  HttpRequestType.swift
 //  Moneybox
 //
 //  Created by Jack Munkonge on 23/10/2019.
@@ -8,7 +8,7 @@
 
 import Foundation
 
-enum HttpMethods: String {
+enum HttpRequestType: String {
     case get
     case post
     case put

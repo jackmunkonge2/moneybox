@@ -17,26 +17,24 @@ class RestService {
     
 
     func makeRequest(toURL url: URL,
-                     withHttpMethod httpMethod: HttpMethods,
+                     withHttpMethod httpMethod: HttpRequestType,
                      completion: @escaping (_ result: HttpResults) -> Void) {
      
-        DispatchQueue.global(qos: .userInitiated).async { [weak self] in
-            let targetURL = self?.addURLQueryParameters(toURL: url)
-            let httpBody = self?.getHttpBody()
-            guard let request = self?.prepareRequest(withURL: targetURL, httpBody: httpBody, httpMethod: httpMethod) else {
-                completion(HttpResults(withError: CustomError.failedToCreateRequest))
-                return
-            }
-
-            let sessionConfiguration = URLSessionConfiguration.default
-            let session = URLSession(configuration: sessionConfiguration)
-            let task = session.dataTask(with: request) { (data, response, error) in
-                completion(HttpResults(withData: data,
-                                   response: HttpResponse(fromURLResponse: response),
-                                   error: error))
-            }
-            task.resume()
+        let targetURL = self.addURLQueryParameters(toURL: url)
+        let httpBody = self.getHttpBody()
+        guard let request = self.prepareRequest(withURL: targetURL, httpBody: httpBody, httpMethod: httpMethod) else {
+            completion(HttpResults(withError: CustomError.failedToCreateRequest))
+            return
         }
+
+        let sessionConfiguration = URLSessionConfiguration.default
+        let session = URLSession(configuration: sessionConfiguration)
+        let task = session.dataTask(with: request) { (data, response, error) in
+            completion(HttpResults(withData: data,
+                               response: HttpResponse(fromURLResponse: response),
+                               error: error))
+        }
+        task.resume()
     }
     
     private func addURLQueryParameters(toURL url: URL) -> URL {
@@ -70,7 +68,7 @@ class RestService {
         }
     }
     
-    private func prepareRequest(withURL url: URL?, httpBody: Data?, httpMethod: HttpMethods) -> URLRequest? {
+    private func prepareRequest(withURL url: URL?, httpBody: Data?, httpMethod: HttpRequestType) -> URLRequest? {
         guard let url = url else { return nil }
         var request = URLRequest(url: url)
         request.httpMethod = httpMethod.rawValue

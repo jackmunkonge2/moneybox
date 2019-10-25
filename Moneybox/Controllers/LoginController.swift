@@ -30,6 +30,7 @@ class LoginController: UIViewController, UITextFieldDelegate {
     // MARK: - Rest Functions
     
     func attemptLogin(withEmail email: String!, withPassword password: String!) {
+        self.restThread.enter()
 
         guard let url = URL(string: "/users/login", relativeTo: Constants.baseURL) else { return }
      
@@ -42,62 +43,46 @@ class LoginController: UIViewController, UITextFieldDelegate {
         rest.httpBodyParameters.add(value: password, forKey: "Password")
         rest.httpBodyParameters.add(value: Constants.idfa, forKey: "Idfa")
         
-        self.restThread.enter()
         rest.makeRequest(toURL: url.absoluteURL, withHttpMethod: .post) { (results) in
-            guard let response = results.response else { self.restThread.leave(); return }
-            if response.httpStatusCode == 200 {
-                guard let data = results.data else { self.restThread.leave(); return }
-                let decoder = JSONDecoder()
-                guard let loginSuccess = try? decoder.decode(LoginSuccess.self, from: data) else { self.restThread.leave(); return }
-                print("\n\nLogged in successfully!\nBearer Token: \(loginSuccess.session.bearerToken)\n")
-                self.authToken = loginSuccess.session.bearerToken
-                self.loggedIn = true;
-                self.restThread.leave()
+            let decodedData: Any = DecodeUtil.decodeLoginResults(using: results)
+            
+            if let data = decodedData as? LoginSuccess {
+                self.authToken = data.session.bearerToken
+                self.loggedIn = true
+            } else if let data = decodedData as? ValidationErrorMessage {
+                print(data);
+            } else if let data = decodedData as? AuthErrorMessage {
+                print(data);
             } else {
-                guard let data = results.data else { self.restThread.leave(); return }
-                let decoder = JSONDecoder()
-                guard let authTimeout = try? decoder.decode(StandardErrorMessage.self, from: data) else {
-                    let invalidCredentials = try! decoder.decode(ValidationErrorMessage.self, from: data)
-                    print(invalidCredentials);
-                    //TODO: show invalidcreds error on UI
-                    self.restThread.leave()
-                    return
-                }
-                print(authTimeout)
-                self.loggedIn = false
-                self.restThread.leave()
-                return
+                let data = decodedData as? StandardErrorMessage
+                print(data!);
             }
+            self.restThread.leave()
         }
     }
     
     func getInvestorProducts() {
-        
         self.restThread.enter()
+        
         guard let url = URL(string: "/investorproducts", relativeTo: Constants.baseURL) else { self.restThread.leave(); return }
 
         rest.requestHttpHeaders.add(value: "Bearer " + self.authToken, forKey: "Authorization")
         rest.httpBodyParameters.clear()
         
         rest.makeRequest(toURL: url.absoluteURL, withHttpMethod: .get) { (results) in
-
-            if let response = results.response {
-                if response.httpStatusCode != 200 {
-                    print("\nRequest failed with HTTP status code", response.httpStatusCode, "\n")
-                    guard let data = results.data else { return }
-                    let decoder = JSONDecoder()
-                    guard let authTimeout = try? decoder.decode(StandardErrorMessage.self, from: data) else { return }
-                    print(authTimeout)
-                    self.loggedIn = false
-                    return
-                }
-            }
-
-            if let data = results.data {
-                let decoder = JSONDecoder()
-                decoder.keyDecodingStrategy = .convertFromSnakeCase
-                guard let investorProductData = try? decoder.decode(InvestorProducts.self, from: data) else { return }
-                self.outputData = investorProductData
+            let decodedData: Any = DecodeUtil.decodeInvestorResults(using: results)
+            
+            if let data = decodedData as? InvestorProducts {
+                self.outputData = data
+            } else if let data = decodedData as? AuthErrorMessage {
+                print(data)
+                self.loggedIn = false
+                self.restThread.leave()
+            } else {
+                let data = decodedData as? StandardErrorMessage
+                print(data!);
+                self.loggedIn = false
+                self.restThread.leave()
             }
         }
         return
@@ -149,6 +134,7 @@ class LoginController: UIViewController, UITextFieldDelegate {
     
     override func viewWillAppear(_ animated: Bool) {
         self.navigationController?.isNavigationBarHidden = true
+        self.loggedIn = false
     }
     
     func textFieldDidBeginEditing(_ textField: UITextField) {

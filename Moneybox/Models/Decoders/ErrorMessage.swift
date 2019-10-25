@@ -19,6 +19,12 @@ struct StandardErrorMessage: Codable {
         case message = "Message"
         case validationErrors = "ValidationErrors"
     }
+    
+    init(_ name: String, _ message: String) {
+        self.name = name
+        self.message = message
+        self.validationErrors = []
+    }
 }
 
 struct ValidationErrorMessage: Codable {
@@ -40,5 +46,17 @@ struct ValidationError: Codable {
     private enum CodingKeys: String, CodingKey {
         case name = "Name"
         case message = "Message"
+    }
+}
+
+struct AuthErrorMessage: Codable {
+    var name: String
+    var message: String
+    var validationErrors: [String]
+    
+    private enum CodingKeys: String, CodingKey {
+        case name = "Name"
+        case message = "Message"
+        case validationErrors = "ValidationErrors"
     }
 }

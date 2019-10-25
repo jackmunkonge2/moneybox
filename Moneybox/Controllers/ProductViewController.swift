@@ -46,8 +46,8 @@ class ProductViewController: UIViewController {
     // MARK: - Functions
     
     func refreshPageData() {
-        
         restThread.enter()
+        
         guard let url = URL(string: "/investorproducts", relativeTo: Constants.baseURL) else { self.restThread.leave(); return }
         
         rest.requestHttpHeaders.add(value: Constants.appId, forKey: "Appid")
@@ -58,24 +58,19 @@ class ProductViewController: UIViewController {
         rest.httpBodyParameters.clear()
         
         rest.makeRequest(toURL: url.absoluteURL, withHttpMethod: .get) { (results) in
+            let decodedData: Any = DecodeUtil.decodeInvestorResults(using: results)
             
-            if let response = results.response {
-                if response.httpStatusCode != 200 {
-                    print("\nRequest failed with HTTP status code", response.httpStatusCode, "\n")
-                    guard let data = results.data else { return }
-                    let decoder = JSONDecoder()
-                    guard let authTimeout = try? decoder.decode(StandardErrorMessage.self, from: data) else { return }
-                    print(authTimeout)
-                    //TODO: show auth timeout error on UI
-                    return
-                }
-            }
-
-            if let data = results.data {
-                let decoder = JSONDecoder()
-                decoder.keyDecodingStrategy = .convertFromSnakeCase
-                guard let updatedData = try? decoder.decode(InvestorProducts.self, from: data) else { return }
-                self.updatedProductsData = updatedData
+            if let data = decodedData as? InvestorProducts {
+                self.updatedProductsData = data
+            } else if let data = decodedData as? AuthErrorMessage {
+                print(data)
+                // TODO: Logout here
+                self.restThread.leave()
+            } else {
+                let data = decodedData as? StandardErrorMessage
+                print(data!);
+                // TODO: Logout here
+                self.restThread.leave()
             }
         }
         return
@@ -88,8 +83,8 @@ class ProductViewController: UIViewController {
     }
     
     func oneOffPayment() {
-        
         restThread.enter()
+        
         guard let url = URL(string: "/oneoffpayments", relativeTo: Constants.baseURL) else { return }
         
         rest.requestHttpHeaders.add(value: Constants.appId, forKey: "Appid")
@@ -102,14 +97,19 @@ class ProductViewController: UIViewController {
         rest.httpBodyParameters.add(value: String(productId!), forKey: "InvestorProductId")
         
         rest.makeRequest(toURL: url.absoluteURL, withHttpMethod: .post) { (results) in
-            guard let response = results.response else { self.restThread.leave(); return }
-            if response.httpStatusCode == 200 {
-                guard let data = results.data else { self.restThread.leave(); return }
-                let decoder = JSONDecoder()
-                if let moneyboxData = try? decoder.decode(Moneybox.self, from: data) {
-                    self.moneyboxReturnData = moneyboxData
-                    return
-                }
+            let decodedData: Any = DecodeUtil.decodeMoneyboxResults(using: results)
+            
+            if let data = decodedData as? Moneybox {
+                self.moneyboxReturnData = data
+            } else if let data = decodedData as? AuthErrorMessage {
+                print(data)
+                // TODO: Logout here
+                self.restThread.leave()
+            } else {
+                let data = decodedData as? StandardErrorMessage
+                print(data!);
+                // TODO: Logout here
+                self.restThread.leave()
             }
         }
         return
