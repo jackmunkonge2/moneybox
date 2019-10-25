@@ -42,6 +42,8 @@ class ProductViewController: UIViewController {
     
     let rest = RestService()
     let restThread = DispatchGroup()
+    
+    var loggingOut = false
 
     // MARK: - Functions
     
@@ -64,12 +66,10 @@ class ProductViewController: UIViewController {
                 self.updatedProductsData = data
             } else if let data = decodedData as? AuthErrorMessage {
                 print(data)
-                // TODO: Logout here
                 self.restThread.leave()
             } else {
                 let data = decodedData as? StandardErrorMessage
                 print(data!);
-                // TODO: Logout here
                 self.restThread.leave()
             }
         }
@@ -79,7 +79,11 @@ class ProductViewController: UIViewController {
     @IBAction func addMoney(_ sender: UIButton) {
         oneOffPayment()
         restThread.wait()
-        updateUI(withNewMoneybox: moneyboxReturnData!)
+        if let returnData = moneyboxReturnData {
+            updateUI(withNewMoneybox: returnData)
+        } else {
+            performSegue(withIdentifier: "unwindFromProduct", sender: nil)
+        }
     }
     
     func oneOffPayment() {
@@ -103,12 +107,12 @@ class ProductViewController: UIViewController {
                 self.moneyboxReturnData = data
             } else if let data = decodedData as? AuthErrorMessage {
                 print(data)
-                // TODO: Logout here
+                self.loggingOut = true
                 self.restThread.leave()
             } else {
                 let data = decodedData as? StandardErrorMessage
                 print(data!);
-                // TODO: Logout here
+                self.loggingOut = true
                 self.restThread.leave()
             }
         }
@@ -124,11 +128,17 @@ class ProductViewController: UIViewController {
     // MARK: - Navigation
     
     override func viewWillDisappear(_ animated: Bool) {
-        if self.delegate != nil {
+        if self.delegate != nil && !loggingOut {
             refreshPageData()
             restThread.wait()
-            let dataToBeSent = self.updatedProductsData
-            self.delegate?.sendDataBack(myData: dataToBeSent!)
+            
+            if let dataToBeSent = self.updatedProductsData {
+                self.delegate?.sendDataBack(myData: dataToBeSent)
+            } else {
+                performSegue(withIdentifier: "unwindFromProduct", sender: nil)
+            }
+        } else if loggingOut {
+            loggingOut = !loggingOut
         }
     }
     
