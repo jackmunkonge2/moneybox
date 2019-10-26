@@ -11,14 +11,6 @@ import XCTest
 
 class HttpModels: XCTestCase {
     
-    let baseUrl = URL(string: "http://test.com")!
-    let url = URL(string: "/test", relativeTo: baseUrl) else {
-        XCTFail("Couldn't create absolute test URL")
-    }
-    
-    let urlResponse = URLResponse(url: url, mimeType: <#T##String?#>, expectedContentLength: <#T##Int#>, textEncodingName: <#T##String?#>)
-    let httpResponse = HttpResponse(fromURLResponse: <#T##URLResponse?#>)
-    
     override func setUp() {
         super.setUp()
     }
