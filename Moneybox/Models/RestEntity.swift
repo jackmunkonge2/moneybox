@@ -31,3 +31,9 @@ struct RestEntity {
         return values.count
     }
 }
+
+extension RestEntity: Equatable {
+  static func ==(lhs: RestEntity, rhs: RestEntity) -> Bool {
+    return lhs.values == rhs.values
+  }
+}

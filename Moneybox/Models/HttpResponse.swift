@@ -26,3 +26,11 @@ struct HttpResponse {
         }
     }
 }
+
+extension HttpResponse: Equatable {
+  static func == (lhs: HttpResponse, rhs: HttpResponse) -> Bool {
+    return lhs.response == rhs.response &&
+    lhs.httpStatusCode == rhs.httpStatusCode &&
+        lhs.headers == rhs.headers
+  }
+}
