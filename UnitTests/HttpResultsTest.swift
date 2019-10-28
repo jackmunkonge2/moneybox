@@ -33,13 +33,13 @@ class HttpResultsTest: XCTestCase {
         let results = HttpResults(withData: data, response: httpResponse, error: error)
         XCTAssertEqual(results.data, Data())
         XCTAssertEqual(results.response, httpResponse)
-        XCTAssertEqual(results.error.debugDescription, "Optional(Moneybox.CustomError.failedToCreateRequest)")
+        XCTAssertTrue(results.error is CustomError)
     }
     
     func testHttpResults_withError_isValid() {
         let results = HttpResults(withError: error)
         XCTAssertNil(results.data)
         XCTAssertNil(results.response)
-        XCTAssertEqual(results.error.debugDescription, "Optional(Moneybox.CustomError.failedToCreateRequest)")
+        XCTAssertTrue(results.error is CustomError)
     }
 }
