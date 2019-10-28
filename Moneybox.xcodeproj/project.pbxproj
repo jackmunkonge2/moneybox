@@ -19,7 +19,6 @@
 		044E4D1C2365EFF600B2992B /* RestEntityTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 044E4D1B2365EFF600B2992B /* RestEntityTest.swift */; };
 		044E4D1E2365F52F00B2992B /* HttpResultsTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 044E4D1D2365F52F00B2992B /* HttpResultsTest.swift */; };
 		044E4D202366064F00B2992B /* DecodeUtilTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 044E4D1F2366064F00B2992B /* DecodeUtilTest.swift */; };
-		049F95202366321D00B8E2EC /* RestServiceTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 049F951F2366321D00B8E2EC /* RestServiceTest.swift */; };
 		04AB44BE2358FCEE0044B7EA /* ProductViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04AB44BD2358FCEE0044B7EA /* ProductViewController.swift */; };
 		04CECCBE236341550027D6B2 /* DecodeUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04CECCBD236341550027D6B2 /* DecodeUtil.swift */; };
 		04DFE5472354EADA00DF0F30 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04DFE5462354EADA00DF0F30 /* AppDelegate.swift */; };
@@ -61,7 +60,6 @@
 		044E4D1B2365EFF600B2992B /* RestEntityTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RestEntityTest.swift; sourceTree = "<group>"; };
 		044E4D1D2365F52F00B2992B /* HttpResultsTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HttpResultsTest.swift; sourceTree = "<group>"; };
 		044E4D1F2366064F00B2992B /* DecodeUtilTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DecodeUtilTest.swift; sourceTree = "<group>"; };
-		049F951F2366321D00B8E2EC /* RestServiceTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RestServiceTest.swift; sourceTree = "<group>"; };
 		04AB44BD2358FCEE0044B7EA /* ProductViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductViewController.swift; sourceTree = "<group>"; };
 		04CECCBD236341550027D6B2 /* DecodeUtil.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DecodeUtil.swift; sourceTree = "<group>"; };
 		04DFE5432354EADA00DF0F30 /* Moneybox.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Moneybox.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -206,7 +204,6 @@
 				044E4D1B2365EFF600B2992B /* RestEntityTest.swift */,
 				044E4D1D2365F52F00B2992B /* HttpResultsTest.swift */,
 				044E4D1F2366064F00B2992B /* DecodeUtilTest.swift */,
-				049F951F2366321D00B8E2EC /* RestServiceTest.swift */,
 			);
 			path = UnitTests;
 			sourceTree = "<group>";
@@ -425,7 +422,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				04FBBE30236357AE00D0EDDD /* DecoderTests.swift in Sources */,
-				049F95202366321D00B8E2EC /* RestServiceTest.swift in Sources */,
 				044E4D1C2365EFF600B2992B /* RestEntityTest.swift in Sources */,
 				044E4D1E2365F52F00B2992B /* HttpResultsTest.swift in Sources */,
 				04FBBE3823635CC000D0EDDD /* HttpResponseTest.swift in Sources */,
